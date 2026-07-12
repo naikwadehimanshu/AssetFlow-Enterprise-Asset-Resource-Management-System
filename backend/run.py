@@ -23,7 +23,7 @@ def main():
     print("Launching FastAPI dev server on http://localhost:8000 (Swagger docs at http://localhost:8000/docs)...")
     try:
         import uvicorn
-        uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+        uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True, reload_dirs=["app"])
     except ImportError:
         print("Error: Uvicorn not installed. Please run: pip install -r requirements.txt")
         sys.exit(1)

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import timedelta
@@ -21,25 +21,34 @@ def signup(user_in: schemas.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db=db, user_in=user_in)
 
 @router.post("/login", response_model=schemas.Token)
-def login(
-    login_data: Optional[schemas.UserLogin] = None,
-    form_data: Optional[OAuth2PasswordRequestForm] = Depends(None),
+async def login(
+    request: Request,
     db: Session = Depends(get_db)
 ):
     # Support both JSON payload login and OAuth2 Form data login
+    content_type = request.headers.get("content-type", "")
     email = None
     password = None
 
-    if form_data:
-        email = form_data.username
-        password = form_data.password
-    elif login_data:
-        email = login_data.email
-        password = login_data.password
-    else:
+    if "application/json" in content_type:
+        try:
+            body = await request.json()
+            email = body.get("email")
+            password = body.get("password")
+        except Exception:
+            pass
+    elif "application/x-www-form-urlencoded" in content_type or "multipart/form-data" in content_type:
+        try:
+            form = await request.form()
+            email = form.get("username")
+            password = form.get("password")
+        except Exception:
+            pass
+
+    if not email or not password:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Login credentials must be provided either as JSON or form data."
+            detail="Login credentials must be provided either as JSON (email/password) or form data (username/password)."
         )
 
     user = crud.get_user_by_email(db, email=email)

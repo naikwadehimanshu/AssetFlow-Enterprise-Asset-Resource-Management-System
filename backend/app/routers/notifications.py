@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 
 from ..database import get_db
 from ..dependencies import require_asset_manager, require_any_role, get_current_user
@@ -10,12 +10,37 @@ router = APIRouter(prefix="/api/notifications", tags=["Notifications & Activity 
 
 @router.get("", response_model=List[schemas.NotificationOut])
 def get_user_notifications(
+    filter_type: Optional[str] = "All",  # All, Alerts, Approvals, Bookings
     db: Session = Depends(get_db),
     current_user: models.User = Depends(require_any_role)
 ):
-    notifs = db.query(models.Notification).filter(
+    query = db.query(models.Notification).filter(
         models.Notification.user_id == current_user.id
-    ).order_by(models.Notification.created_at.desc()).all()
+    )
+    
+    if filter_type and filter_type.lower() != "all":
+        f = filter_type.lower()
+        if f == "alerts":
+            query = query.filter(
+                models.Notification.type.in_([
+                    "Overdue Return", "Audit Discrepancy", "Overdue return", "audit discrepancy flagged"
+                ])
+            )
+        elif f == "approvals":
+            query = query.filter(
+                models.Notification.type.in_([
+                    "Transfer Request", "Transfer Approved", "Transfer Rejected", 
+                    "Maintenance Update", "Maintenance request approved", "Transfer approved"
+                ])
+            )
+        elif f == "bookings":
+            query = query.filter(
+                models.Notification.type.in_([
+                    "Booking Confirmation", "Booking Cancelled", "Booking confirmed", "Booking cancelled"
+                ])
+            )
+            
+    notifs = query.order_by(models.Notification.created_at.desc()).all()
     return notifs
 
 @router.put("/{id}/read", response_model=schemas.NotificationOut)

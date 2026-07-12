@@ -169,7 +169,87 @@ def seed_db():
             acquisition_date=date(2026, 1, 2), is_shared=False
         )
         
-        db.add_all([a_dell12, a_dell14, a_proj, a_chair, a_room, a_car, a_ac, a_fork, a_print, a_chair2])
+        # Dell Laptop AF-003
+        a_dell03 = models.Asset(
+            name="Dell laptop", asset_tag="AF-003", serial_number="SN-DELL-00301",
+            qr_code=f"ASSETFLOW:AF-003:{uuid.uuid4().hex[:8]}",
+            category_id=cat_elec.id, status="Allocated", condition="Good",
+            location="Desk E12", acquisition_cost=1200.00,
+            acquisition_date=date(2026, 2, 1), is_shared=False,
+            current_holder_id=u_priya.id, department_id=dept_eng.id
+        )
+        # Office Chair AF-9921
+        a_chair9921 = models.Asset(
+            name="Office chair", asset_tag="AF-9921", serial_number="SN-CHAIR-9921",
+            qr_code=f"ASSETFLOW:AF-9921:{uuid.uuid4().hex[:8]}",
+            category_id=cat_furn.id, status="Allocated", condition="Good",
+            location="Desk E14", acquisition_cost=150.00,
+            acquisition_date=date(2026, 1, 15), is_shared=False,
+            current_holder_id=u_priya.id, department_id=dept_eng.id
+        )
+        # Monitor AF-9838
+        a_monitor9838 = models.Asset(
+            name="Monitor", asset_tag="AF-9838", serial_number="SN-MON-9838",
+            qr_code=f"ASSETFLOW:AF-9838:{uuid.uuid4().hex[:8]}",
+            category_id=cat_elec.id, status="Allocated", condition="Good",
+            location="Desk E15", acquisition_cost=300.00,
+            acquisition_date=date(2026, 2, 10), is_shared=False,
+            current_holder_id=u_priya.id, department_id=dept_eng.id
+        )
+        # Van AF-343
+        a_van343 = models.Asset(
+            name="Van", asset_tag="AF-343", serial_number="VEH-VAN-343",
+            qr_code=f"ASSETFLOW:AF-343:{uuid.uuid4().hex[:8]}",
+            category_id=cat_veh.id, status="Available", condition="Good",
+            location="Parking", acquisition_cost=30000.00,
+            acquisition_date=date(2026, 1, 10), is_shared=True
+        )
+        # Projector AF-335
+        a_proj335 = models.Asset(
+            name="Projector", asset_tag="AF-335", serial_number="SN-PROJ-335",
+            qr_code=f"ASSETFLOW:AF-335:{uuid.uuid4().hex[:8]}",
+            category_id=cat_elec.id, status="Available", condition="Good",
+            location="Conference Room B2", acquisition_cost=800.00,
+            acquisition_date=date(2026, 2, 15), is_shared=True
+        )
+        # Camera AF-0301 (unused 60+ days)
+        a_camera0301 = models.Asset(
+            name="Camera", asset_tag="AF-0301", serial_number="SN-CAM-0301",
+            qr_code=f"ASSETFLOW:AF-0301:{uuid.uuid4().hex[:8]}",
+            category_id=cat_elec.id, status="Available", condition="Good",
+            location="Warehouse", acquisition_cost=500.00,
+            acquisition_date=date.today() - timedelta(days=62), is_shared=False
+        )
+        # Chair AF-0410 (unused 45 days)
+        a_chair0410 = models.Asset(
+            name="Chair", asset_tag="AF-0410", serial_number="SN-CHAIR-0410",
+            qr_code=f"ASSETFLOW:AF-0410:{uuid.uuid4().hex[:8]}",
+            category_id=cat_furn.id, status="Available", condition="Good",
+            location="Warehouse", acquisition_cost=150.00,
+            acquisition_date=date.today() - timedelta(days=46), is_shared=False
+        )
+        # Forklift AF-0087 (service due in 5 days, condition Damaged)
+        a_fork0087 = models.Asset(
+            name="Forklift", asset_tag="AF-0087", serial_number="SN-FORK-0087",
+            qr_code=f"ASSETFLOW:AF-0087:{uuid.uuid4().hex[:8]}",
+            category_id=cat_veh.id, status="Under Maintenance", condition="Damaged",
+            location="Yard", acquisition_cost=18000.00,
+            acquisition_date=date.today() - timedelta(days=120), is_shared=False
+        )
+        # Laptop AF-0020 (4 years old: nearing retirement)
+        a_laptop0020 = models.Asset(
+            name="Laptop", asset_tag="AF-0020", serial_number="SN-LAP-0020",
+            qr_code=f"ASSETFLOW:AF-0020:{uuid.uuid4().hex[:8]}",
+            category_id=cat_elec.id, status="Allocated", condition="Good",
+            location="Bengaluru", acquisition_cost=1200.00,
+            acquisition_date=date.today() - timedelta(days=365 * 4), is_shared=False,
+            current_holder_id=u_priya.id, department_id=dept_eng.id
+        )
+        
+        db.add_all([
+            a_dell12, a_dell14, a_proj, a_chair, a_room, a_car, a_ac, a_fork, a_print, a_chair2,
+            a_dell03, a_chair9921, a_monitor9838, a_van343, a_proj335, a_camera0301, a_chair0410, a_fork0087, a_laptop0020
+        ])
         db.commit()
         
         # 5. Create Allocation History
@@ -196,54 +276,64 @@ def seed_db():
         
         # 6. Create Resource Bookings
         print("Creating bookings...")
-        # Meeting Room B2 booking on Tuesday July 7, 09:00 to 10:00
-        # For dates, let's use a fixed target date (e.g. 2026-07-07)
-        b_room = models.Booking(
-            asset_id=a_room.id, booked_by_id=u_aditi.id,
-            start_time=datetime(2026, 7, 7, 9, 0, 0),
-            end_time=datetime(2026, 7, 7, 10, 0, 0),
-            status="Completed"
-        )
-        # Also create a future booking
-        tomorrow = datetime.utcnow() + timedelta(days=1)
-        b_room_fut = models.Booking(
-            asset_id=a_room.id, booked_by_id=u_priya.id,
-            start_time=datetime(tomorrow.year, tomorrow.month, tomorrow.day, 14, 0, 0),
-            end_time=datetime(tomorrow.year, tomorrow.month, tomorrow.day, 15, 0, 0),
-            status="Upcoming"
-        )
-        db.add_all([b_room, b_room_fut])
+        # 34 bookings for Conference Room B2 (AF-9901)
+        for i in range(34):
+            b = models.Booking(
+                asset_id=a_room.id,
+                booked_by_id=u_aditi.id if i % 2 == 0 else u_priya.id,
+                start_time=datetime.utcnow() - timedelta(days=i, hours=2),
+                end_time=datetime.utcnow() - timedelta(days=i, hours=1),
+                status="Completed"
+            )
+            db.add(b)
+
+        # 21 bookings for Van (AF-343)
+        for i in range(21):
+            b = models.Booking(
+                asset_id=a_van343.id,
+                booked_by_id=u_arjun.id if i % 2 == 0 else u_priya.id,
+                start_time=datetime.utcnow() - timedelta(days=i, hours=4),
+                end_time=datetime.utcnow() - timedelta(days=i, hours=3),
+                status="Completed"
+            )
+            db.add(b)
+
+        # 18 bookings for Projector (AF-335)
+        for i in range(18):
+            b = models.Booking(
+                asset_id=a_proj335.id,
+                booked_by_id=u_raj.id if i % 2 == 0 else u_priya.id,
+                start_time=datetime.utcnow() - timedelta(days=i, hours=6),
+                end_time=datetime.utcnow() - timedelta(days=i, hours=5),
+                status="Completed"
+            )
+            db.add(b)
         db.commit()
-        
+
         # 7. Create Maintenance Requests
         print("Creating maintenance requests...")
-        # Projector AF-0062 bulb not turning on (Pending)
         m_proj = models.MaintenanceRequest(
             asset_id=a_proj.id, reporter_id=u_priya.id,
             description="Projector bulb not turning on", priority="High",
             status="Pending", created_at=datetime(2026, 7, 10, 10, 0, 0)
         )
-        # AC Unit AF-0003 noisy compressor (Approved)
         m_ac = models.MaintenanceRequest(
             asset_id=a_ac.id, reporter_id=u_raj.id,
             description="ac unit noisy compressor", priority="Medium",
             status="Approved", created_at=datetime(2026, 7, 8, 14, 30, 0)
         )
-        # Forklift AF-0078 tech R Varma assigned (Technician Assigned)
         m_fork = models.MaintenanceRequest(
             asset_id=a_fork.id, reporter_id=u_arjun.id,
             description="Forklift - regular servicing needed", priority="High",
             status="Technician Assigned", technician_name="R Varma",
             created_at=datetime(2026, 7, 7, 11, 15, 0)
         )
-        # Printer AF-0897 printer jam (In Progress)
         m_print = models.MaintenanceRequest(
             asset_id=a_print.id, reporter_id=u_raj.id,
             description="Printer Jam - parts ordered", priority="Low",
             status="In Progress", technician_name="Internal IT Support",
             created_at=datetime(2026, 7, 6, 9, 45, 0)
         )
-        # Office chair AF-0873 chair repair (Resolved on July 7)
         m_chair2 = models.MaintenanceRequest(
             asset_id=a_chair2.id, reporter_id=u_arjun.id,
             description="Chair repair - loose bolts", priority="Low",
@@ -254,22 +344,106 @@ def seed_db():
         )
         db.add_all([m_proj, m_ac, m_fork, m_print, m_chair2])
         db.commit()
-        
+
+        # 7.5 Create Audit Cycles and Records
+        print("Creating audit cycle...")
+        audit_cycle = models.AuditCycle(
+            name="Q3 audit: Engineering dept - 1-15 jul",
+            start_date=date(2026, 7, 1),
+            end_date=date(2026, 7, 15),
+            scope_type="department",
+            scope_value="Engineering",
+            status="Active"
+        )
+        db.add(audit_cycle)
+        db.commit()
+
+        # Assign auditors
+        assign_aditi = models.AuditAssignment(audit_cycle_id=audit_cycle.id, auditor_id=u_aditi.id)
+        assign_sana = models.AuditAssignment(audit_cycle_id=audit_cycle.id, auditor_id=u_sana.id)
+        db.add_all([assign_aditi, assign_sana])
+        db.commit()
+
+        # Seed records with statuses matching Screen 8:
+        # - AF-003 Dell laptop: Verified
+        # - AF-9921 Office chair: Missing
+        # - AF-9838 Monitor: Damaged
+        rec_dell03 = models.AuditRecord(
+            audit_cycle_id=audit_cycle.id,
+            asset_id=a_dell03.id,
+            auditor_id=u_aditi.id,
+            verification_status="Verified",
+            notes="Verified at desk",
+            audited_at=datetime(2026, 7, 12, 10, 0, 0)
+        )
+        rec_chair9921 = models.AuditRecord(
+            audit_cycle_id=audit_cycle.id,
+            asset_id=a_chair9921.id,
+            auditor_id=u_aditi.id,
+            verification_status="Missing",
+            notes="Not at expected desk",
+            audited_at=datetime(2026, 7, 12, 10, 30, 0)
+        )
+        rec_monitor9838 = models.AuditRecord(
+            audit_cycle_id=audit_cycle.id,
+            asset_id=a_monitor9838.id,
+            auditor_id=u_sana.id,
+            verification_status="Damaged",
+            notes="Cracked bezel",
+            audited_at=datetime(2026, 7, 12, 11, 0, 0)
+        )
+        db.add_all([rec_dell03, rec_chair9921, rec_monitor9838])
+        db.commit()
+
         # 8. Create some Notifications
         print("Creating notifications...")
-        n1 = models.Notification(
-            user_id=u_priya.id, type="Asset Assigned", title="Laptop Assigned",
-            message="Laptop AF-0114 - allocated to Priya shah - IT dept", created_at=datetime.utcnow()
-        )
-        n2 = models.Notification(
-            user_id=u_priya.id, type="Booking Confirmation", title="Booking Confirmed",
-            message="Room B2 - booking confirmed - 2:00 to 3:00 PM", created_at=datetime.utcnow() - timedelta(hours=2)
-        )
-        n3 = models.Notification(
-            user_id=u_priya.id, type="Maintenance Update", title="Maintenance Resolved",
-            message="Projector AF-0062 - maintenance resolved", created_at=datetime.utcnow() - timedelta(days=1)
-        )
-        db.add_all([n1, n2, n3])
+        # Seed the notifications for all users to ensure anyone logged in can view them
+        for u in [u_admin, u_manager, u_aditi, u_rohan, u_sana, u_priya, u_raj, u_arjun]:
+            notifs = [
+                models.Notification(
+                    user_id=u.id,
+                    type="Asset Assigned",
+                    title="Laptop Assigned",
+                    message="Laptop AF-0014 assigned to Priya shah",
+                    created_at=datetime.utcnow() - timedelta(minutes=2)
+                ),
+                models.Notification(
+                    user_id=u.id,
+                    type="Maintenance request approved",
+                    title="Maintenance Approved",
+                    message="Maintenance request AF-0055 approved",
+                    created_at=datetime.utcnow() - timedelta(minutes=18)
+                ),
+                models.Notification(
+                    user_id=u.id,
+                    type="Booking confirmed",
+                    title="Booking Confirmed",
+                    message="Booking confirmed : Room B2 : 2:00 to 3:00 PM",
+                    created_at=datetime.utcnow() - timedelta(hours=1)
+                ),
+                models.Notification(
+                    user_id=u.id,
+                    type="Transfer approved",
+                    title="Transfer Approved",
+                    message="Transfer approved : AF-0033 to facilities dept",
+                    created_at=datetime.utcnow() - timedelta(hours=3)
+                ),
+                models.Notification(
+                    user_id=u.id,
+                    type="Overdue return",
+                    title="Overdue Return Alert",
+                    message="Overdue return : AF-0021 was due 3 days ago",
+                    created_at=datetime.utcnow() - timedelta(days=1)
+                ),
+                models.Notification(
+                    user_id=u.id,
+                    type="audit discrepancy flagged",
+                    title="Audit Discrepancy Flagged",
+                    message="audit discrepancy flagged : AF-0088 damaged",
+                    created_at=datetime.utcnow() - timedelta(days=2)
+                )
+            ]
+            db.add_all(notifs)
         db.commit()
         
         # 9. Log some initial activities
