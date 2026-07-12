@@ -1,346 +1,1721 @@
-<!DOCTYPE html><html lang="en" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssetFlow - Enterprise Asset & Resource Management</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- ApexCharts CDN for Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    try {
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "on-tertiary-container": "#4f3712",
-                    "on-tertiary-fixed-variant": "#5b421c",
-                    "surface-container-low": "#1c1b1b",
-                    "error-container": "#93000a",
-                    "on-tertiary": "#422c08",
-                    "surface-container-lowest": "#0e0e0e",
-                    "tertiary-fixed": "#ffddb1",
-                    "surface": "#131313",
-                    "surface-container": "#20201f",
-                    "surface-bright": "#393939",
-                    "outline-variant": "#4e453b",
-                    "secondary-fixed-dim": "#c8c6c6",
-                    "on-primary": "#432c06",
-                    "on-error": "#690005",
-                    "primary-fixed-dim": "#e8c08d",
-                    "on-primary-container": "#503710",
-                    "inverse-primary": "#77592f",
-                    "on-background": "#e5e2e1",
-                    "on-secondary-fixed-variant": "#474747",
-                    "surface-container-highest": "#353535",
-                    "surface-tint": "#e8c08d",
-                    "background": "#131313",
-                    "on-tertiary-fixed": "#291800",
-                    "primary-fixed": "#ffddb4",
-                    "error": "#ffb4ab",
-                    "primary": "#e8c08d",
-                    "on-secondary": "#303030",
-                    "secondary": "#c8c6c6",
-                    "tertiary-fixed-dim": "#e5c190",
-                    "surface-variant": "#353535",
-                    "on-surface": "#e5e2e1",
-                    "tertiary-container": "#c2a173",
-                    "on-secondary-fixed": "#1b1c1c",
-                    "surface-dim": "#131313",
-                    "on-surface-variant": "#d2c4b7",
-                    "on-secondary-container": "#b6b5b4",
-                    "secondary-container": "#474747",
-                    "primary-container": "#c5a070",
-                    "outline": "#9b8f82",
-                    "on-primary-fixed": "#291800",
-                    "on-primary-fixed-variant": "#5d421a",
-                    "secondary-fixed": "#e4e2e1",
-                    "tertiary": "#e5c190",
-                    "inverse-on-surface": "#313030",
-                    "on-error-container": "#ffdad6",
-                    "surface-container-high": "#2a2a2a",
-                    "inverse-surface": "#e5e2e1"
+              "tertiary-container": "#231500",
+              "background": "#131315",
+              "primary": "#bec6e0",
+              "on-primary-fixed": "#131b2e",
+              "outline": "#909097",
+              "surface-container-low": "#1b1b1d",
+              "on-tertiary-container": "#957d5a",
+              "on-secondary-fixed-variant": "#3a485c",
+              "surface-bright": "#39393b",
+              "tertiary-fixed": "#fcdeb5",
+              "inverse-on-surface": "#303032",
+              "surface-container-highest": "#353436",
+              "outline-variant": "#45464d",
+              "on-tertiary-fixed": "#271901",
+              "secondary": "#b9c7e0",
+              "on-tertiary": "#3e2d11",
+              "surface-tint": "#bec6e0",
+              "secondary-fixed-dim": "#b9c7e0",
+              "error": "#ffb4ab",
+              "on-error": "#690005",
+              "on-tertiary-fixed-variant": "#574425",
+              "tertiary": "#dec29a",
+              "on-surface-variant": "#c6c6cd",
+              "on-primary-fixed-variant": "#3f465c",
+              "surface-variant": "#353436",
+              "on-secondary": "#233144",
+              "on-surface": "#e4e2e4",
+              "secondary-fixed": "#d5e3fd",
+              "inverse-surface": "#e4e2e4",
+              "primary-container": "#0f172a",
+              "surface-container": "#1f1f21",
+              "surface-container-high": "#2a2a2b",
+              "primary-fixed": "#dae2fd",
+              "surface-dim": "#131315",
+              "on-error-container": "#ffdad6",
+              "primary-fixed-dim": "#bec6e0",
+              "inverse-primary": "#565e74",
+              "tertiary-fixed-dim": "#dec29a",
+              "on-secondary-container": "#abb9d2",
+              "error-container": "#93000a",
+              "secondary-container": "#3c4a5e",
+              "on-primary-container": "#798098",
+              "surface-container-lowest": "#0e0e10",
+              "surface": "#131315",
+              "on-background": "#e4e2e4",
+              "on-primary": "#283044",
+              "on-secondary-fixed": "#0d1c2f"
             },
             "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
             },
             "spacing": {
-                    "margin-desktop": "40px",
-                    "gutter": "24px",
-                    "margin-mobile": "16px",
-                    "unit": "8px",
-                    "glass-padding": "24px"
+              "sidebar-width": "240px",
+              "container-padding": "24px",
+              "margin-mobile": "16px",
+              "margin-desktop": "32px",
+              "gutter": "16px",
+              "unit": "4px"
             },
             "fontFamily": {
-                    "body-md": ["Manrope"],
-                    "headline-lg": ["Manrope"],
-                    "label-caps": ["JetBrains Mono"],
-                    "headline-lg-mobile": ["Manrope"],
-                    "body-lg": ["Manrope"],
-                    "display-lg": ["Manrope"],
-                    "headline-md": ["Manrope"],
-                    "data-mono": ["JetBrains Mono"]
+              "headline-md": ["Hanken Grotesk"],
+              "body-sm": ["Inter"],
+              "display-lg": ["Hanken Grotesk"],
+              "body-lg": ["Inter"],
+              "headline-sm": ["Hanken Grotesk"],
+              "body-md": ["Inter"],
+              "headline-md-mobile": ["Hanken Grotesk"],
+              "label-mono": ["JetBrains Mono"]
             },
             "fontSize": {
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
-                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+              "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+              "display-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+              "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+              "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+              "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+              "headline-md-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+              "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
             }
-          },
-        },
-      }
-    }catch(_e){}</script><meta charset="utf-8"></head><body class="font-body-md">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-primary/10" style="border-bottom-width: 1.5px; border-color: rgba(255, 255, 255, 0.15); box-shadow: rgba(255, 255, 255, 0.05) 0px -1px 10px inset, rgba(0, 0, 0, 0.4) 0px 20px 40px;">
-<div class="flex justify-between items-center h-20 px-margin-desktop max-w-[1440px] mx-auto w-full">
-<div class="flex items-center gap-8">
-<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgIkpg_5d5lP981wG8uhNOsBs7VWJAwt2o8k3T0wHsXlYJ0R7ypeFKUm0ej6i1I41J3xPqGegQNtd41X9wZG21O7TJuA37XsHxRxaNZ1gkBRXnS0Y6qpUj5DGxzFzj9hyz8IsUSnvqLc1k1EPGk0u7L2UGC0gBphedIFY5CU6pkHMjzFBvw4f5a24qIV36uZBKMqizbRnteeMXaMgFlF1flFV7nAuY8qksD5ZN_BDptuZQNexe6zWV_Fmz6h4siqtISW0e8sGEfWM" alt="Kinetix Logo" class="h-8 w-auto">
-<div class="hidden md:flex gap-6">
-<a href="#" class="font-body-md text-body-md text-primary font-semibold border-b-2 border-primary pb-1 transition-colors duration-300">Platform</a>
-<a href="#" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300">Liquidity</a>
-<a href="#" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300">Security</a>
-<a href="#" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300">Insights</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="px-6 py-2 text-on-surface-variant hover:text-primary transition-colors duration-300 font-medium">Login</button>
-<button class="px-6 py-2 bg-primary text-on-primary rounded-full font-semibold hover:brightness-110 transition-all duration-300 gold-glow">Sign Up</button>
-</div>
-</div>
-</nav>
-<main class="pt-20">
-<!-- Hero Section -->
-<section class="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-margin-mobile md:px-margin-desktop hero-gradient overflow-hidden">
-<!-- 3D Layered Background Elements -->
-<div class="absolute inset-0 pointer-events-none">
-<div class="absolute top-1/4 left-10 asset-node opacity-20 blur-sm">
-<div class="w-64 h-64 rounded-full border border-primary/30"></div>
-</div>
-<div class="absolute bottom-1/4 right-10 asset-node opacity-20 blur-sm" style="animation-delay: -2s">
-<div class="w-96 h-96 rounded-full border border-primary/20"></div>
-</div>
-</div>
-<div class="relative z-10 max-w-4xl mx-auto">
-<span class="font-label-caps text-primary mb-4 block tracking-[0.2em] uppercase">The Future of Capital Efficiency</span>
-<h1 class="font-display-lg text-display-lg md:text-[64px] text-white leading-tight mb-6">
-                    Precision Asset <br>
-<span class="text-primary italic">Flow Management</span>
-</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
-                    Kinetix orchestrates institutional-grade liquidity with cryptographic security, ensuring your assets move with unparalleled velocity and absolute integrity.
-                </p>
-<div class="flex flex-wrap justify-center gap-6">
-<button class="group relative px-8 py-4 bg-primary text-on-primary font-bold rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shadow-2xl shadow-primary/20">
-<span class="relative z-10">Explore the Platform</span>
-<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-</button>
-<button class="px-8 py-4 bg-surface-container-highest/40 backdrop-blur-md border border-primary/30 text-primary font-bold rounded-xl hover:bg-primary/10 transition-all duration-300">
-                        View Documentation
-                    </button>
-</div>
-</div>
-<!-- Central Hero Graphic (2D Layers Depth) -->
-<div class="relative mt-20 w-full max-w-[1000px] aspect-video glass-card rounded-3xl overflow-hidden group">
-<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
-<!-- SVG Visualization Content -->
-<svg viewBox="0 0 800 450" class="w-full h-full p-12">
-<defs>
-<linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" style="stop-color:#e8c08d;stop-opacity:1"></stop>
-<stop offset="100%" style="stop-color:#c5a070;stop-opacity:1"></stop>
-</linearGradient>
-</defs>
-<!-- Flow Lines -->
-<path d="M50 225 Q 200 100 400 225 T 750 225" fill="none" stroke="url(#goldGrad)" stroke-width="2" class="line-flow opacity-40"></path>
-<path d="M50 225 Q 200 350 400 225 T 750 225" fill="none" stroke="url(#goldGrad)" stroke-width="2" class="line-flow opacity-20" style="animation-delay: -5s"></path>
-<!-- Nodes -->
-<circle cx="50" cy="225" r="8" fill="#e8c08d" class="animate-pulse"></circle>
-<circle cx="400" cy="225" r="12" fill="none" stroke="#e8c08d" stroke-width="2"></circle>
-<circle cx="400" cy="225" r="4" fill="#e8c08d"></circle>
-<circle cx="750" cy="225" r="8" fill="#e8c08d" class="animate-pulse"></circle>
-<!-- Floating Data Points -->
-<g class="asset-node" style="animation-duration: 8s">
-<rect x="150" y="80" width="120" height="60" rx="8" fill="rgba(32, 32, 31, 0.8)" stroke="rgba(197, 160, 112, 0.3)"></rect>
-<text x="165" y="105" fill="#e8c08d" font-family="JetBrains Mono" font-size="12">LIQUIDITY</text>
-<text x="165" y="125" fill="white" font-family="JetBrains Mono" font-size="14" font-weight="bold">$4.2B</text>
-</g>
-<g class="asset-node" style="animation-duration: 10s; animation-delay: -3s">
-<rect x="550" y="280" width="120" height="60" rx="8" fill="rgba(32, 32, 31, 0.8)" stroke="rgba(197, 160, 112, 0.3)"></rect>
-<text x="565" y="305" fill="#e8c08d" font-family="JetBrains Mono" font-size="12">SECURITY</text>
-<text x="565" y="325" fill="white" font-family="JetBrains Mono" font-size="14" font-weight="bold">99.9% Uptime</text>
-</g>
-</svg>
-<!-- Interactive UI elements appearing on card -->
-<div class="absolute bottom-8 left-8 flex gap-4">
-<div class="glass-card px-4 py-2 rounded-lg text-xs font-data-mono text-primary border-primary/20">
-                        LIVE_FEED: ACTIVE
+          }
+        }
+      };
+    } catch (_e) {}
+  </script>
+
+  <!-- Interactive State Styling using Tailwind play-CDN -->
+  <style type="text/tailwindcss">
+    .d-none { display: none !important; }
+    .d-flex { display: flex !important; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      @apply bg-surface-container-high rounded-full;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      @apply bg-outline;
+    }
+
+    /* Toast Notifications styling */
+    .toast-container {
+      @apply fixed top-4 right-4 flex flex-col gap-3 z-[9999];
+    }
+    .toast {
+      @apply flex items-start gap-3 p-4 rounded-xl bg-slate-900 border border-slate-800 text-on-surface shadow-2xl min-w-[320px] transition-all duration-300;
+    }
+    .toast-info { border-left: 4px solid var(--info, #3b82f6); }
+    .toast-success { border-left: 4px solid #10b981; }
+    .toast-error { border-left: 4px solid #ef4444; }
+    .toast-warning { border-left: 4px solid #f59e0b; }
+    .toast.fade-out {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      @apply fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[1000] opacity-0 pointer-events-none transition-opacity duration-300;
+    }
+    .modal-overlay.active {
+      @apply opacity-100 pointer-events-auto;
+    }
+    .modal-container {
+      @apply bg-[#151b2d] border border-slate-800 rounded-2xl w-full max-w-lg mx-4 overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300;
+    }
+    .modal-overlay.active .modal-container {
+      @apply scale-100;
+    }
+    .modal-header {
+      @apply flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/40;
+    }
+    .modal-body {
+      @apply p-6 max-h-[75vh] overflow-y-auto space-y-4;
+    }
+    .modal-footer {
+      @apply flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-800 bg-slate-950/40;
+    }
+
+    /* Sidebar Links active/inactive */
+    .sidebar-item {
+      @apply flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg cursor-pointer font-semibold duration-150;
+    }
+    .sidebar-item.active {
+      @apply bg-secondary-container text-on-secondary-container font-semibold;
+    }
+
+    /* Tab Buttons admin panel */
+    .tab-btn {
+      @apply px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-highest font-body-sm text-body-sm transition-colors cursor-pointer;
+    }
+    .tab-btn.active {
+      @apply border-primary text-primary bg-primary/10 font-semibold;
+    }
+    .admin-tab-content {
+      @apply block;
+    }
+    .admin-tab-content.d-none {
+      @apply hidden !important;
+    }
+
+    /* Badges default */
+    .badge {
+      @apply inline-flex items-center justify-center text-xs font-semibold px-2.5 py-0.5 rounded-full border;
+    }
+    .badge-available, .badge-active {
+      @apply bg-emerald-950/40 text-emerald-400 border-emerald-800/40;
+    }
+    .badge-allocated {
+      @apply bg-blue-950/40 text-blue-400 border-blue-800/40;
+    }
+    .badge-reserved {
+      @apply bg-amber-950/40 text-amber-400 border-amber-800/40;
+    }
+    .badge-maintenance {
+      @apply bg-indigo-950/40 text-indigo-400 border-indigo-800/40;
+    }
+    .badge-lost {
+      @apply bg-red-950/40 text-red-400 border-red-800/40;
+    }
+    .badge-retired {
+      @apply bg-slate-950/40 text-slate-400 border-slate-800/40;
+    }
+    .badge-pending {
+      @apply bg-purple-950/40 text-purple-400 border-purple-800/40;
+    }
+
+    /* Notification items */
+    .notification-item {
+      @apply flex items-start gap-4 p-4 rounded-xl bg-slate-950 border border-slate-900/80 transition-all;
+    }
+    .notification-item.unread {
+      @apply bg-[#151b2d]/60 border-l-4 border-l-[#8b5cf6];
+    }
+    .notification-icon {
+      @apply w-10 h-10 rounded-full bg-slate-900 border border-slate-800 text-[#8b5cf6] flex items-center justify-center shrink-0;
+    }
+    .notification-content {
+      @apply flex-1 min-w-0;
+    }
+    .notification-title {
+      @apply font-semibold text-on-surface text-sm;
+    }
+    .notification-desc {
+      @apply text-xs text-on-surface-variant mt-0.5;
+    }
+    .notification-time {
+      @apply text-[10px] text-slate-500 mt-2 font-label-mono;
+    }
+
+    /* Resource booking slot */
+    .booking-slot {
+      @apply flex items-center justify-between p-4 rounded-xl bg-slate-950 border border-slate-900/80;
+    }
+    .booking-slot-info {
+      @apply flex-1 min-w-0;
+    }
+    .booking-slot-title {
+      @apply font-semibold text-on-surface text-sm;
+    }
+    .booking-slot-time {
+      @apply text-xs text-on-surface-variant mt-1 flex items-center gap-1.5;
+    }
+
+    /* Kanban layout */
+    .kanban-card {
+      @apply bg-slate-950 border border-slate-900/80 rounded-xl p-4 cursor-pointer hover:border-slate-700 hover:bg-slate-900 transition-all shadow-sm;
+    }
+    .kanban-card-title {
+      @apply font-semibold text-on-surface text-sm mb-1;
+    }
+    .kanban-card-desc {
+      @apply text-xs text-on-surface-variant line-clamp-2 mb-3;
+    }
+    .kanban-card-footer {
+      @apply flex items-center justify-between text-[10px] text-slate-500 border-t border-slate-900/50 pt-2;
+    }
+
+    /* Conflict Warnings */
+    .conflict-alert {
+      @apply bg-red-950/30 border border-red-800/40 text-red-400 p-4 rounded-lg mb-6 text-sm;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+  
+  <!-- ==================== TOAST NOTIFICATIONS ==================== -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ==================== AUTHENTICATION CONTAINER ==================== -->
+  <div id="auth-container" class="min-h-screen w-full flex items-center justify-center bg-[#0B0F19] bg-[radial-gradient(circle_at_top_right,rgba(139,92,246,0.12),transparent_45%),radial-gradient(circle_at_bottom_left,rgba(20,184,166,0.08),transparent_40%)] p-4">
+    <!-- Login Card -->
+    <div id="login-card" class="w-full max-w-md bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl p-8 shadow-2xl">
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 bg-primary/10 text-primary border border-primary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+        </div>
+        <h2 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Welcome to AssetFlow</h2>
+        <p class="text-on-surface-variant text-sm mt-1">Enterprise Asset & Resource Manager</p>
+      </div>
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label for="login-email" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Email Address</label>
+          <input type="email" id="login-email" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-on-surface placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="name@company.com" required value="admin@company.com">
+        </div>
+        <div>
+          <label for="login-password" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Password</label>
+          <input type="password" id="login-password" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-on-surface placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="••••••••" required value="password123">
+        </div>
+        <button type="submit" class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-semibold py-2.5 rounded-lg transition-colors text-sm shadow-lg shadow-primary/20 active:scale-[0.98] transform transition-transform">Log In</button>
+      </form>
+      <div class="text-center mt-6 text-xs text-on-surface-variant">
+        Don't have an account? <a href="#" id="show-signup" class="text-primary hover:underline font-medium">Create Employee Account</a>
+      </div>
+    </div>
+
+    <!-- Signup Card -->
+    <div id="signup-card" class="w-full max-w-md bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl p-8 shadow-2xl d-none">
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 bg-primary/10 text-primary border border-primary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+        </div>
+        <h2 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Create Account</h2>
+        <p class="text-on-surface-variant text-sm mt-1">Join your organization's directory</p>
+      </div>
+      <form id="signup-form" class="space-y-4">
+        <div>
+          <label for="signup-name" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Full Name</label>
+          <input type="text" id="signup-name" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-on-surface placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="John Doe" required>
+        </div>
+        <div>
+          <label for="signup-email" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Email Address</label>
+          <input type="email" id="signup-email" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-on-surface placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="name@company.com" required>
+        </div>
+        <div>
+          <label for="signup-password" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Password</label>
+          <input type="password" id="signup-password" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-on-surface placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-semibold py-2.5 rounded-lg transition-colors text-sm shadow-lg shadow-primary/20 active:scale-[0.98] transform transition-transform">Sign Up</button>
+      </form>
+      <div class="text-center mt-6 text-xs text-on-surface-variant">
+        Already have an account? <a href="#" id="show-login" class="text-primary hover:underline font-medium">Log In</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APPLICATION LAYOUT ==================== -->
+  <div id="app-wrapper" class="app-wrapper d-none min-h-screen flex flex-col md:flex-row bg-background">
+    
+    <!-- TopAppBar (Mobile Only) -->
+    <header class="md:hidden flex items-center justify-between px-margin-mobile h-16 bg-surface-dim border-b border-outline-variant fixed top-0 w-full z-40 shrink-0">
+      <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary cursor-pointer active:scale-95" id="mobile-menu-btn">menu</span>
+        <span class="font-headline-md-mobile text-headline-md-mobile font-bold text-primary">AssetFlow</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full relative" id="mobile-bell-icon">
+          notifications
+        </span>
+      </div>
+    </header>
+
+    <!-- SideNavBar (Desktop Drawer / Mobile Slideout) -->
+    <nav id="sidebar-nav" class="hidden md:flex flex-col p-4 bg-surface-container border-r border-outline-variant fixed left-0 top-0 h-full w-[250px] z-50 shrink-0">
+      <!-- Header -->
+      <div class="flex items-center gap-3 px-4 py-4 mb-6">
+        <div class="w-8 h-8 rounded bg-primary flex items-center justify-center">
+          <span class="material-symbols-outlined text-on-primary font-bold text-lg" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+        </div>
+        <div>
+          <h1 class="font-headline-sm text-headline-sm font-black text-on-surface leading-none">AssetFlow</h1>
+          <p class="font-body-sm text-[10px] uppercase text-on-surface-variant mt-1 tracking-wider">Enterprise EAM</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Button in Navbar -->
+      <button id="btn-open-register-modal" class="w-full bg-primary hover:brightness-110 text-on-primary font-label-mono text-xs py-3 rounded-lg mb-6 flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 duration-100">
+        <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">add</span>
+        <span>Register Asset</span>
+      </button>
+
+      <!-- Sidebar Navigation Links -->
+      <div class="flex-1 space-y-1 overflow-y-auto">
+        <div class="sidebar-item active" data-view="dashboard">
+          <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="sidebar-item" data-view="assets">
+          <span class="material-symbols-outlined text-lg">inventory_2</span>
+          <span>Assets Directory</span>
+        </div>
+        <div class="sidebar-item" data-view="allocations">
+          <span class="material-symbols-outlined text-lg">move_up</span>
+          <span>Allocations</span>
+        </div>
+        <div class="sidebar-item" data-view="bookings">
+          <span class="material-symbols-outlined text-lg">event_available</span>
+          <span>Resource Booking</span>
+        </div>
+        <div class="sidebar-item" data-view="maintenance">
+          <span class="material-symbols-outlined text-lg">build</span>
+          <span>Maintenance</span>
+        </div>
+        <div class="sidebar-item" data-view="audits">
+          <span class="material-symbols-outlined text-lg">fact_check</span>
+          <span>Audit Cycles</span>
+        </div>
+        <div id="nav-reports" class="sidebar-item" data-view="reports" style="display: none;">
+          <span class="material-symbols-outlined text-lg">assessment</span>
+          <span>Reports & Analytics</span>
+        </div>
+        <div id="nav-admin" class="sidebar-item" data-view="admin" style="display: none;">
+          <span class="material-symbols-outlined text-lg">settings</span>
+          <span>Organization Setup</span>
+        </div>
+        <div id="nav-logs" class="sidebar-item" data-view="logs" style="display: none;">
+          <span class="material-symbols-outlined text-lg">file_text</span>
+          <span>System Logs</span>
+        </div>
+        <div id="nav-notifications" class="sidebar-item" data-view="notifications">
+          <span class="material-symbols-outlined text-lg">notifications</span>
+          <span>Notifications</span>
+        </div>
+      </div>
+
+      <!-- Footer User Profile Info -->
+      <div class="mt-auto pt-4 border-t border-outline-variant">
+        <div class="flex items-center gap-3 px-3 py-2 bg-surface-container-high rounded-xl border border-outline-variant/30">
+          <div id="user-avatar" class="w-9 h-9 rounded-full bg-primary/20 text-primary border border-primary/30 flex items-center justify-center font-bold text-sm shrink-0">
+            AD
+          </div>
+          <div class="flex-1 min-w-0">
+            <div id="sidebar-user-name" class="font-body-md text-xs text-on-surface truncate font-semibold">Loading...</div>
+            <div id="sidebar-user-role" class="text-[9px] text-on-surface-variant truncate uppercase tracking-wider">role</div>
+          </div>
+          <button id="btn-logout" class="text-on-surface-variant hover:text-error transition-colors p-1 shrink-0" title="Log Out">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 md:ml-[250px] pt-16 md:pt-0 min-h-screen flex flex-col overflow-hidden bg-background">
+      
+      <!-- Main Header (Desktop Title Area) -->
+      <header class="hidden md:flex items-center justify-between px-6 py-4 border-b border-outline-variant bg-surface shrink-0 z-30">
+        <div class="header-title-area">
+          <h2 id="current-view-title" class="font-display-lg text-xl font-bold text-on-surface">Dashboard Overview</h2>
+        </div>
+        <div class="header-actions flex items-center gap-4">
+          <!-- Bell notifications button -->
+          <div id="bell-icon" class="relative cursor-pointer text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all p-2 rounded-full border border-outline-variant/40 flex items-center justify-center">
+            <span class="material-symbols-outlined text-xl">notifications</span>
+            <span id="notif-count" class="absolute -top-1 -right-1 bg-error text-on-error font-label-mono text-[9px] px-1.5 py-0.5 rounded-full font-bold">0</span>
+          </div>
+          <div id="header-user-display" class="font-body-md text-sm text-on-surface font-semibold border-l border-outline-variant/40 pl-4">User Display</div>
+        </div>
+      </header>
+
+      <!-- View Sections Canvas -->
+      <div class="view-body flex-1 p-6 overflow-y-auto">
+        
+        <!-- ==================== 1. DASHBOARD VIEW ==================== -->
+        <section id="view-dashboard" class="view-section space-y-6">
+          <!-- Metrics Bento Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- Available -->
+            <div class="bg-surface-container border border-outline-variant rounded-lg p-6 relative overflow-hidden group">
+              <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <span class="material-symbols-outlined text-6xl text-primary">inventory_2</span>
+              </div>
+              <h3 class="font-label-mono text-label-mono text-[10px] text-on-surface-variant mb-2 uppercase tracking-wider">Available Assets</h3>
+              <div class="flex items-end gap-3">
+                <span id="kpi-avail" class="font-display-lg text-display-lg text-primary">0</span>
+              </div>
+              <p class="font-body-sm text-[10px] text-on-surface-variant mt-4">Ready for deployment</p>
+            </div>
+            <!-- Allocated -->
+            <div class="bg-surface-container border border-outline-variant rounded-lg p-6 relative overflow-hidden group">
+              <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <span class="material-symbols-outlined text-6xl text-secondary">assignment_ind</span>
+              </div>
+              <h3 class="font-label-mono text-label-mono text-[10px] text-on-surface-variant mb-2 uppercase tracking-wider">Allocated</h3>
+              <div class="flex items-end gap-3">
+                <span id="kpi-alloc" class="font-display-lg text-display-lg text-secondary">0</span>
+              </div>
+              <p class="font-body-sm text-[10px] text-on-surface-variant mt-4">Currently in use</p>
+            </div>
+            <!-- Maintenance -->
+            <div class="bg-surface-container border border-outline-variant rounded-lg p-6 relative overflow-hidden group border-l-4 border-l-error">
+              <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <span class="material-symbols-outlined text-6xl text-error">build_circle</span>
+              </div>
+              <h3 class="font-label-mono text-label-mono text-[10px] text-on-surface-variant mb-2 uppercase tracking-wider">In Maintenance</h3>
+              <div class="flex items-end gap-3">
+                <span id="kpi-maint" class="font-display-lg text-display-lg text-error">0</span>
+              </div>
+              <p class="font-body-sm text-[10px] text-on-surface-variant mt-4">Needs urgent servicing</p>
+            </div>
+            <!-- Active Bookings -->
+            <div class="bg-surface-container border border-outline-variant rounded-lg p-6 relative overflow-hidden group">
+              <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <span class="material-symbols-outlined text-6xl text-tertiary">event_available</span>
+              </div>
+              <h3 class="font-label-mono text-label-mono text-[10px] text-on-surface-variant mb-2 uppercase tracking-wider">Active Bookings</h3>
+              <div class="flex items-end gap-3">
+                <span id="kpi-bookings" class="font-display-lg text-display-lg text-tertiary">0</span>
+              </div>
+              <p class="font-body-sm text-[10px] text-on-surface-variant mt-4">Shared resources booked</p>
+            </div>
+            <!-- Pending Transfers -->
+            <div class="bg-surface-container border border-outline-variant rounded-lg p-6 relative overflow-hidden group">
+              <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <span class="material-symbols-outlined text-6xl text-on-surface-variant">git_pull_request</span>
+              </div>
+              <h3 class="font-label-mono text-label-mono text-[10px] text-on-surface-variant mb-2 uppercase tracking-wider">Pending Transfers</h3>
+              <div class="flex items-end gap-3">
+                <span id="kpi-transfers" class="font-display-lg text-display-lg text-on-surface-variant">0</span>
+              </div>
+              <p class="font-body-sm text-[10px] text-on-surface-variant mt-4">Awaiting manager signoff</p>
+            </div>
+          </div>
+
+          <!-- Charts, Alerts & Quick Actions Layout -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Mock Chart Section (2/3 width) -->
+            <div class="lg:col-span-2 bg-surface-container border border-outline-variant rounded-lg p-6 flex flex-col justify-between">
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="font-headline-sm text-lg font-semibold text-on-surface">Asset Utilization Trend</h3>
+                <div class="flex gap-1.5">
+                  <button class="px-2.5 py-1 bg-surface-container-high rounded text-xs text-on-surface-variant border border-outline-variant hover:text-on-surface">Weekly</button>
+                  <button class="px-2.5 py-1 bg-secondary-container rounded text-xs text-on-secondary-container font-semibold">Monthly</button>
+                </div>
+              </div>
+              <!-- Mock bars graphic -->
+              <div class="flex-1 min-h-[220px] flex items-end gap-3 pb-8 border-b border-l border-outline-variant/60 relative px-4">
+                <div class="absolute -left-8 top-0 h-full flex flex-col justify-between font-label-mono text-[9px] text-on-surface-variant py-2">
+                  <span>100%</span>
+                  <span>75%</span>
+                  <span>50%</span>
+                  <span>25%</span>
+                  <span>0%</span>
+                </div>
+                <div class="flex-1 bg-surface-container-high h-[40%] rounded-t hover:bg-primary/20 transition-colors"></div>
+                <div class="flex-1 bg-surface-container-high h-[55%] rounded-t hover:bg-primary/20 transition-colors"></div>
+                <div class="flex-1 bg-primary h-[85%] rounded-t relative group cursor-pointer">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-surface-container-highest px-1.5 py-0.5 rounded text-[9px] font-label-mono border border-outline-variant opacity-0 group-hover:opacity-100 transition-opacity">85%</div>
+                </div>
+                <div class="flex-1 bg-surface-container-high h-[30%] rounded-t hover:bg-primary/20 transition-colors"></div>
+                <div class="flex-1 bg-primary h-[90%] rounded-t"></div>
+                <div class="flex-1 bg-surface-container-high h-[60%] rounded-t hover:bg-primary/20 transition-colors"></div>
+                <div class="flex-1 bg-secondary h-[78%] rounded-t opacity-80"></div>
+                <!-- X labels -->
+                <div class="absolute -bottom-6 left-0 w-full flex justify-between px-4 font-label-mono text-[9px] text-on-surface-variant">
+                  <span>Jan</span>
+                  <span>Feb</span>
+                  <span>Mar</span>
+                  <span>Apr</span>
+                  <span>May</span>
+                  <span>Jun</span>
+                  <span>Jul</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Alert Column (1/3 width) -->
+            <div class="flex flex-col gap-6">
+              <!-- Overdue alert card -->
+              <div class="bg-surface-container border border-outline-variant rounded-lg flex flex-col overflow-hidden">
+                <div class="p-4 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+                  <h3 class="font-headline-sm text-sm font-bold text-on-surface flex items-center gap-2">
+                    <span class="material-symbols-outlined text-error text-base">notification_important</span>
+                    <span>Assets Overdue</span>
+                  </h3>
+                  <span id="overdue-count" class="bg-error-container/20 text-error font-label-mono px-2 py-0.5 rounded text-[10px] font-bold border border-error/20">0 items</span>
+                </div>
+                <div class="flex-1 max-h-[300px] overflow-y-auto">
+                  <table class="w-full text-left border-collapse">
+                    <tbody id="overdue-tbody" class="divide-y divide-outline-variant/30 text-xs text-on-surface">
+                      <tr>
+                        <td class="p-4 text-center text-on-surface-variant font-body-sm">Loading overdue returns...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Quick Actions Card -->
+              <div class="bg-surface-container border border-outline-variant rounded-lg p-5">
+                <div class="flex items-center gap-2 mb-4 pb-3 border-b border-outline-variant">
+                  <span class="material-symbols-outlined text-primary text-base">zap</span>
+                  <h3 class="font-headline-sm text-sm font-bold text-on-surface">Quick Actions</h3>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                  <div id="qa-register" class="bg-surface-container-high border border-outline-variant rounded-lg p-2.5 flex flex-col items-center justify-center gap-1.5 hover:bg-surface-container-highest transition-colors cursor-pointer text-center group">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="material-symbols-outlined text-base">add_circle</span>
                     </div>
-<div class="glass-card px-4 py-2 rounded-lg text-xs font-data-mono text-on-surface-variant border-white/10">
-                        HASH: 0x4f...92a
+                    <span class="font-body-sm text-[10px] font-semibold text-on-surface">Register</span>
+                  </div>
+                  <div id="qa-book" class="bg-surface-container-high border border-outline-variant rounded-lg p-2.5 flex flex-col items-center justify-center gap-1.5 hover:bg-surface-container-highest transition-colors cursor-pointer text-center group">
+                    <div class="w-8 h-8 rounded-full bg-secondary/10 text-secondary flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="material-symbols-outlined text-base">calendar_month</span>
                     </div>
-</div>
-</div>
-</section>
-<!-- Performance Metrics-->
-<section class="py-24 max-w-[1440px] mx-auto px-margin-desktop">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
-<div class="glass-card p-glass-padding rounded-2xl">
-<span class="material-symbols-outlined text-primary mb-4" style="font-variation-settings: 'FILL' 1;">speed</span>
-<h3 class="font-headline-md text-headline-md mb-2">3.2ms</h3>
-<p class="text-on-surface-variant text-body-md">Average execution latency across global nodes.</p>
-</div>
-<div class="glass-card p-glass-padding rounded-2xl">
-<span class="material-symbols-outlined text-primary mb-4" style="font-variation-settings: 'FILL' 1;">security</span>
-<h3 class="font-headline-md text-headline-md mb-2">Zero-Trust</h3>
-<p class="text-on-surface-variant text-body-md">Encrypted multi-party computation architecture.</p>
-</div>
-<div class="glass-card p-glass-padding rounded-2xl">
-<span class="material-symbols-outlined text-primary mb-4" style="font-variation-settings: 'FILL' 1;">hub</span>
-<h3 class="font-headline-md text-headline-md mb-2">50+ Hubs</h3>
-<p class="text-on-surface-variant text-body-md">Connected liquidity providers and venues.</p>
-</div>
-<div class="glass-card p-glass-padding rounded-2xl">
-<span class="material-symbols-outlined text-primary mb-4" style="font-variation-settings: 'FILL' 1;">query_stats</span>
-<h3 class="font-headline-md text-headline-md mb-2">$120T+</h3>
-<p class="text-on-surface-variant text-body-md">Total transaction flow processed annually.</p>
-</div>
-</div>
-</section>
-<!-- Dynamic Visualization Section (Bento Style) -->
-<section class="py-24 bg-surface-container-lowest/50">
-<div class="max-w-[1440px] mx-auto px-margin-desktop">
-<div class="grid grid-cols-12 gap-8">
-<!-- Main Feature -->
-<div class="col-span-12 lg:col-span-8 glass-card rounded-3xl p-12 min-h-[500px] flex flex-col justify-between overflow-hidden relative">
-<div class="relative z-10 max-w-md">
-<h2 class="font-headline-lg text-headline-lg text-white mb-6">Real-Time Fluidity Engine</h2>
-<p class="text-on-surface-variant text-body-lg mb-8">
-                                Visualize your entire asset ecosystem through our proprietary neural-path interface. Monitor flows, anticipate bottlenecks, and optimize routing in milliseconds.
-                            </p>
-<button class="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all">
-                                Launch Visualization Engine <span class="material-symbols-outlined">arrow_forward</span>
-</button>
-</div>
-<!-- Abstract Background Decoration -->
-<div class="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none">
-<div class="w-full h-full bg-cover bg-center" data-alt="A sophisticated abstract 3D render of glowing golden fluid lines flowing through a dark charcoal digital space. The lines create a network of interconnected nodes, representing asset movement. The lighting is cinematic with deep shadows and high-contrast gold highlights, creating a sense of luxury and precision fintech technology." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDfFbnoj72vqn9GNem0-Y7cnOykd1_EPm8qaO35s1N6Wxm9rKlbk2WR2oFH4t1XZd6EN3gWhROUZEq4M6SMfUMS1Dh67mf5XDAtZQhfUhATz2hvwIsR8pJcmmpWWui8Y0A8Q_IPtd2SI8WySPxPdOTLIzTWsTe8MXleJAiTq-l9wGg19-TD4Pyk0SW4SGGHaH2ufObWkhqueplBhJhQHkn0n5r0xilown-v5FU1AGG1Gth21Ky16u6EUabnCf_G_0fRR1pjCnlsQX8')"></div>
-</div>
-</div>
-<!-- Secondary Feature -->
-<div class="col-span-12 lg:col-span-4 flex flex-col gap-8">
-<div class="glass-card flex-1 rounded-3xl p-8 flex flex-col justify-center">
-<div class="flex items-center gap-4 mb-4">
-<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary">shield</span>
-</div>
-<h4 class="font-headline-md text-headline-md">Vault Security</h4>
-</div>
-<p class="text-on-surface-variant">Military-grade encryption for cold-storage asset movements.</p>
-</div>
-<div class="glass-card flex-1 rounded-3xl p-8 flex flex-col justify-center">
-<div class="flex items-center gap-4 mb-4">
-<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary">insights</span>
-</div>
-<h4 class="font-headline-md text-headline-md">Smart Insights</h4>
-</div>
-<p class="text-on-surface-variant">Predictive analytics for liquidity forecasting and risk management.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Trust Section -->
-<section class="py-32 text-center">
-<h2 class="font-label-caps text-on-surface-variant mb-12 tracking-[0.3em]">TRUSTED BY INSTITUTIONAL PARTNERS</h2>
-<div class="flex flex-wrap justify-center gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-3xl">account_balance</span>
-<span class="font-headline-md font-bold">MERIDIAN</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-3xl">diamond</span>
-<span class="font-headline-md font-bold">LUX-FI</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-3xl">token</span>
-<span class="font-headline-md font-bold">VECTOR</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-3xl">stat_3</span>
-<span class="font-headline-md font-bold">QUANTUM</span>
-</div>
-</div>
-</section>
-<!-- CTA Section -->
-<section class="py-24 px-margin-desktop">
-<div class="max-w-[1200px] mx-auto glass-card rounded-[40px] p-16 text-center relative overflow-hidden" style="border-width: 1.5px; border-color: rgba(197, 160, 112, 0.4); box-shadow: rgba(197, 160, 112, 0.1) 0px 0px 20px inset;">
-<div class="absolute inset-0 hero-gradient"></div>
-<div class="relative z-10">
-<h2 class="font-display-lg text-headline-lg md:text-display-lg mb-6">Ready to Accelerate Your Capital?</h2>
-<p class="text-on-surface-variant text-body-lg max-w-xl mx-auto mb-10">
-                        Join the world's most sophisticated asset managers and experience the next generation of flow management.
-                    </p>
-<div class="flex flex-col sm:flex-row justify-center gap-4">
-<button class="px-12 py-4 bg-primary text-on-primary font-bold rounded-xl gold-glow hover:scale-105 transition-all">Get Started Now</button>
-<button class="px-12 py-4 border border-white/20 text-white font-bold rounded-xl hover:bg-white/5 transition-all">Schedule a Demo</button>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-surface-container-lowest w-full py-12 border-t border-outline-variant/20">
-<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-[1440px] mx-auto gap-8">
-<div class="flex flex-col items-center md:items-start gap-4">
-<img alt="Kinetix Logo" class="h-6 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgIkpg_5d5lP981wG8uhNOsBs7VWJAwt2o8k3T0wHsXlYJ0R7ypeFKUm0ej6i1I41J3xPqGegQNtd41X9wZG21O7TJuA37XsHxRxaNZ1gkBRXnS0Y6qpUj5DGxzFzj9hyz8IsUSnvqLc1k1EPGk0u7L2UGC0gBphedIFY5CU6pkHMjzFBvw4f5a24qIV36uZBKMqizbRnteeMXaMgFlF1flFV7nAuY8qksD5ZN_BDptuZQNexe6zWV_Fmz6h4siqtISW0e8sGEfWM">
-<p class="text-on-surface-variant font-body-md text-body-md">© 2024 Kinetix Asset Management. All rights reserved.</p>
-</div>
-<div class="flex flex-wrap justify-center gap-8">
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-200 underline-offset-4 hover:underline" href="#">Terms of Service</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-200 underline-offset-4 hover:underline" href="#">Privacy Policy</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-200 underline-offset-4 hover:underline" href="#">Regulatory Disclosure</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-200 underline-offset-4 hover:underline" href="#">Contact</a>
-</div>
-</div>
-</footer>
-<!-- Floating Action Cluster (Transactional Suppression Rule: Not a transactional page) -->
-<div class="fixed bottom-10 right-10 flex flex-col gap-4 z-[100] md:hidden">
-<button class="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-2xl gold-glow">
-<span class="material-symbols-outlined">add</span>
-</button>
-</div>
-<script>
-        // Smooth reveal on scroll interaction
-        const observerOptions = {
-            threshold: 0.1
-        };
+                    <span class="font-body-sm text-[10px] font-semibold text-on-surface">Book Room</span>
+                  </div>
+                  <div id="qa-maint" class="bg-surface-container-high border border-outline-variant rounded-lg p-2.5 flex flex-col items-center justify-center gap-1.5 hover:bg-surface-container-highest transition-colors cursor-pointer text-center group">
+                    <div class="w-8 h-8 rounded-full bg-error/10 text-error flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="material-symbols-outlined text-base">build</span>
+                    </div>
+                    <span class="font-body-sm text-[10px] font-semibold text-on-surface">Log Issue</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                }
-            });
-        }, observerOptions);
+          <!-- Bottom: Recent Activity table -->
+          <div class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden">
+            <div class="p-4 border-b border-outline-variant flex justify-between items-center">
+              <h3 class="font-headline-sm text-sm font-bold text-on-surface">Recent System Activity</h3>
+              <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface text-lg cursor-pointer">filter_list</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse whitespace-nowrap">
+                <thead>
+                  <tr class="bg-surface-container-low font-label-mono text-xs text-on-surface-variant uppercase border-b border-outline-variant">
+                    <th class="p-4 font-medium">Asset ID</th>
+                    <th class="p-4 font-medium">Description</th>
+                    <th class="p-4 font-medium">Action</th>
+                    <th class="p-4 font-medium">Status</th>
+                    <th class="p-4 font-medium text-right">Time</th>
+                  </tr>
+                </thead>
+                <tbody class="font-body-sm text-xs text-on-surface">
+                  <tr class="border-b border-outline-variant/30 hover:bg-surface-container-highest transition-colors">
+                    <td class="p-4 font-label-mono text-primary">#SRV-102</td>
+                    <td class="p-4">Database Server Cluster</td>
+                    <td class="p-4">Transferred</td>
+                    <td class="p-4">
+                      <span class="bg-emerald-950/40 text-emerald-400 border border-emerald-800/40 px-2 py-0.5 rounded-full text-[9px] font-semibold">Completed</span>
+                    </td>
+                    <td class="p-4 text-right text-on-surface-variant">10 mins ago</td>
+                  </tr>
+                  <tr class="border-b border-outline-variant/30 hover:bg-surface-container-highest transition-colors">
+                    <td class="p-4 font-label-mono text-primary">#LPT-404</td>
+                    <td class="p-4">Engineering Laptop</td>
+                    <td class="p-4">Allocated</td>
+                    <td class="p-4">
+                      <span class="bg-amber-950/40 text-amber-400 border border-amber-800/40 px-2 py-0.5 rounded-full text-[9px] font-semibold">Pending</span>
+                    </td>
+                    <td class="p-4 text-right text-on-surface-variant">1 hr ago</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
 
-        document.querySelectorAll('.glass-card').forEach(el => {
-            el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
-            observer.observe(el);
-        });
+        <!-- ==================== 2. ASSETS DIRECTORY VIEW ==================== -->
+        <section id="view-assets" class="view-section d-none space-y-6">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-surface-container border border-outline-variant rounded-xl p-6">
+            <div>
+              <h2 class="font-display-lg text-lg font-bold text-on-surface">Asset Registry</h2>
+              <p class="font-body-sm text-xs text-on-surface-variant mt-1">Manage and track all enterprise hardware resources and facilities.</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <button id="qa-register-shortcut" class="flex items-center space-x-2 px-4 py-2 bg-primary text-on-primary hover:brightness-110 transition-colors rounded-lg font-semibold text-xs active:scale-95 cursor-pointer">
+                <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">add</span>
+                <span>Register Asset</span>
+              </button>
+            </div>
+          </div>
 
-        // Interactive mouse movement for the hero background elements
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
+          <!-- Filters Group -->
+          <div class="bg-surface-container-low border border-outline-variant rounded-xl p-4 space-y-4">
+            <div class="flex flex-col md:flex-row gap-3">
+              <!-- Search bar -->
+              <div class="relative flex-1">
+                <span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">search</span>
+                <input id="asset-filter-search" class="w-full bg-slate-900 border border-outline-variant rounded-lg pl-10 pr-4 py-2 text-on-surface font-body-md placeholder-slate-600 focus:outline-none focus:border-primary text-sm" placeholder="Search by Tag, Name, or Serial Number..." type="text">
+              </div>
+              <!-- Category Filter -->
+              <div class="relative">
+                <select id="asset-filter-category" class="appearance-none bg-slate-900 border border-outline-variant rounded-lg pl-4 pr-10 py-2 text-on-surface font-body-md focus:outline-none focus:border-primary cursor-pointer text-sm">
+                  <option value="">All Categories</option>
+                </select>
+                <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+              </div>
+              <!-- Status Filter -->
+              <div class="relative">
+                <select id="asset-filter-status" class="appearance-none bg-slate-900 border border-outline-variant rounded-lg pl-4 pr-10 py-2 text-on-surface font-body-md focus:outline-none focus:border-primary cursor-pointer text-sm">
+                  <option value="">All Statuses</option>
+                  <option value="Available">Available</option>
+                  <option value="Allocated">Allocated</option>
+                  <option value="Reserved">Reserved</option>
+                  <option value="Under Maintenance">Under Maintenance</option>
+                  <option value="Lost">Lost</option>
+                  <option value="Retired">Retired</option>
+                  <option value="Disposed">Disposed</option>
+                </select>
+                <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+              </div>
+              <!-- Department Filter -->
+              <div class="relative">
+                <select id="asset-filter-dept" class="appearance-none bg-slate-900 border border-outline-variant rounded-lg pl-4 pr-10 py-2 text-on-surface font-body-md focus:outline-none focus:border-primary cursor-pointer text-sm">
+                  <option value="">All Departments</option>
+                </select>
+                <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+              </div>
+              <!-- Location Filter -->
+              <div class="relative">
+                <input id="asset-filter-location" class="bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface font-body-md focus:outline-none focus:border-primary text-sm w-full md:w-36" placeholder="Location..." type="text">
+              </div>
+              <!-- Filter button -->
+              <button id="btn-search-assets" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 border border-outline-variant rounded-lg text-on-surface text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                <span class="material-symbols-outlined text-sm">tune</span>
+                <span>Filter</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Table Canvas -->
+          <div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse whitespace-nowrap">
+                <thead>
+                  <tr class="bg-surface-container-high border-b border-outline-variant font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                    <th class="px-6 py-4 font-medium">Asset Tag</th>
+                    <th class="px-6 py-4 font-medium">Asset Name</th>
+                    <th class="px-6 py-4 font-medium">Category</th>
+                    <th class="px-6 py-4 font-medium">Status</th>
+                    <th class="px-6 py-4 font-medium">Condition</th>
+                    <th class="px-6 py-4 font-medium">Location</th>
+                    <th class="px-6 py-4 font-medium">Assignee</th>
+                    <th class="px-6 py-4 font-medium text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="assets-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-md">
+                  <tr>
+                    <td colspan="8" class="px-6 py-8 text-center text-on-surface-variant">Loading assets directory...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 3. ALLOCATIONS VIEW ==================== -->
+        <section id="view-allocations" class="view-section d-none space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            document.querySelectorAll('.asset-node').forEach(node => {
-                const speed = node.classList.contains('blur-sm') ? 20 : 40;
-                const moveX = (x - 0.5) * speed;
-                const moveY = (y - 0.5) * speed;
-                node.style.transform = `translate(${moveX}px, ${moveY}px)`;
-            });
-        });
-    </script>
+            <!-- Allocate Asset Form (1/3) -->
+            <div id="allocation-form-card" class="bg-surface-container-low border border-outline-variant rounded-xl p-6 h-fit" style="display: none;">
+              <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-secondary">move_up</span>
+                <h3 class="font-headline-sm text-sm font-bold text-on-surface">Allocate Asset</h3>
+              </div>
 
-</body></html>
+              <!-- Warning block -->
+              <div id="double-allocation-alert" class="conflict-alert hidden">
+                Already Allocated. Direct re-allocation is blocked - submit a transfer request below.
+              </div>
+
+              <form id="allocate-asset-form" class="space-y-4">
+                <div>
+                  <label for="alloc-asset-id" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Select Asset</label>
+                  <div class="relative">
+                    <select id="alloc-asset-id" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary appearance-none text-xs" required>
+                      <option value="">-- Choose Asset --</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="alloc-emp-id" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Allocate to Employee</label>
+                  <div class="relative">
+                    <select id="alloc-emp-id" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary appearance-none text-xs">
+                      <option value="">-- Optional (Can allocate to department) --</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">person</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="alloc-dept-id" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Department</label>
+                  <div class="relative">
+                    <select id="alloc-dept-id" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary appearance-none text-xs">
+                      <option value="">-- Optional (Auto-fills from employee) --</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="alloc-return-date" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Expected Return Date</label>
+                  <input type="date" id="alloc-return-date" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs">
+                </div>
+                <div class="pt-4 flex gap-2 justify-end">
+                  <button type="submit" id="btn-submit-alloc" class="px-4 py-2 rounded-lg bg-primary text-on-primary hover:brightness-110 text-xs font-semibold transition-colors active:scale-95 cursor-pointer">
+                    Confirm Allocation
+                  </button>
+                  <button type="button" id="btn-submit-transfer-req" class="px-4 py-2 rounded-lg bg-secondary text-on-secondary hover:brightness-110 text-xs font-semibold transition-colors active:scale-95 cursor-pointer" style="display: none;">
+                    Request Transfer
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Transfer Requests Inbox (2/3) -->
+            <div class="lg:col-span-2 bg-surface-container-low border border-outline-variant rounded-xl p-6 flex flex-col">
+              <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-primary">git_pull_request</span>
+                <h3 class="font-headline-sm text-sm font-bold text-on-surface">Transfer Requests Inbox</h3>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse whitespace-nowrap">
+                  <thead>
+                    <tr class="bg-surface-container-high border-b border-outline-variant font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                      <th class="px-4 py-3 font-medium">Asset</th>
+                      <th class="px-4 py-3 font-medium">From Employee</th>
+                      <th class="px-4 py-3 font-medium">To Employee</th>
+                      <th class="px-4 py-3 font-medium">Reason</th>
+                      <th class="px-4 py-3 font-medium">Date Requested</th>
+                      <th class="px-4 py-3 font-medium">Status</th>
+                      <th class="px-4 py-3 font-medium text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="transfers-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                    <tr>
+                      <td colspan="7" class="px-4 py-6 text-center text-on-surface-variant">Loading transfer requests inbox...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== 4. RESOURCE BOOKINGS VIEW ==================== -->
+        <section id="view-bookings" class="view-section d-none space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Book Resource Form (1/3) -->
+            <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6 h-fit">
+              <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-primary">clock</span>
+                <h3 class="font-headline-sm text-sm font-bold text-on-surface">Book Shared Resource</h3>
+              </div>
+              <form id="book-resource-form" class="space-y-4">
+                <div>
+                  <label for="book-asset-id" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Shared Resource</label>
+                  <div class="relative">
+                    <select id="book-asset-id" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary appearance-none text-xs" required>
+                      <option value="">-- Choose Shared Asset --</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="book-start" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Start Time</label>
+                  <input type="datetime-local" id="book-start" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+                </div>
+                <div>
+                  <label for="book-end" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">End Time</label>
+                  <input type="datetime-local" id="book-end" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+                </div>
+                <button type="submit" class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-semibold py-2.5 rounded-lg transition-colors text-xs shadow-md active:scale-95 cursor-pointer">Confirm Booking</button>
+              </form>
+            </div>
+
+            <!-- Active Bookings List (2/3) -->
+            <div class="lg:col-span-2 bg-surface-container-low border border-outline-variant rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-secondary">calendar_month</span>
+                <h3 class="font-headline-sm text-sm font-bold text-on-surface">Booking Schedule</h3>
+              </div>
+              <div id="bookings-schedule-container" class="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+                <div class="text-center py-6 text-on-surface-variant text-xs">Loading booking schedules...</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== 5. MAINTENANCE VIEW ==================== -->
+        <section id="view-maintenance" class="view-section d-none space-y-6">
+          <div class="flex justify-between items-center">
+            <div>
+              <h2 class="font-display-lg text-lg font-bold text-on-surface">Maintenance Board</h2>
+              <p class="font-body-sm text-xs text-on-surface-variant mt-1">Track issues, technician assignments, and repairs on enterprise assets.</p>
+            </div>
+            <button id="btn-open-maint-modal" class="flex items-center gap-2 bg-primary text-on-primary hover:brightness-110 px-4 py-2 rounded-lg font-semibold text-xs transition-all shadow-md active:scale-95 cursor-pointer">
+              <span class="material-symbols-outlined text-sm">report_problem</span>
+              <span>Raise Request</span>
+            </button>
+          </div>
+
+          <!-- Kanban Board columns -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
+            
+            <!-- Pending -->
+            <div class="bg-surface-container border border-outline-variant rounded-xl flex flex-col max-h-[70vh]">
+              <div class="p-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center rounded-t-xl shrink-0">
+                <span class="font-semibold text-xs text-on-surface">Pending Approval</span>
+                <span id="col-pending-count" class="bg-slate-800 text-on-surface-variant font-label-mono px-2 py-0.5 rounded text-[10px] font-bold">0</span>
+              </div>
+              <div id="kanban-pending" class="p-4 flex-1 overflow-y-auto space-y-3 min-h-[150px] bg-surface-container-low/20"></div>
+            </div>
+
+            <!-- Approved / Assigned -->
+            <div class="bg-surface-container border border-outline-variant rounded-xl flex flex-col max-h-[70vh]">
+              <div class="p-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center rounded-t-xl shrink-0">
+                <span class="font-semibold text-xs text-on-surface">Approved / Assigned</span>
+                <span id="col-assigned-count" class="bg-slate-800 text-on-surface-variant font-label-mono px-2 py-0.5 rounded text-[10px] font-bold">0</span>
+              </div>
+              <div id="kanban-assigned" class="p-4 flex-1 overflow-y-auto space-y-3 min-h-[150px] bg-surface-container-low/20"></div>
+            </div>
+
+            <!-- In Progress -->
+            <div class="bg-surface-container border border-outline-variant rounded-xl flex flex-col max-h-[70vh]">
+              <div class="p-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center rounded-t-xl shrink-0">
+                <span class="font-semibold text-xs text-on-surface">In Progress</span>
+                <span id="col-progress-count" class="bg-slate-800 text-on-surface-variant font-label-mono px-2 py-0.5 rounded text-[10px] font-bold">0</span>
+              </div>
+              <div id="kanban-progress" class="p-4 flex-1 overflow-y-auto space-y-3 min-h-[150px] bg-surface-container-low/20"></div>
+            </div>
+
+            <!-- Resolved -->
+            <div class="bg-surface-container border border-outline-variant rounded-xl flex flex-col max-h-[70vh]">
+              <div class="p-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center rounded-t-xl shrink-0">
+                <span class="font-semibold text-xs text-on-surface">Resolved / Closed</span>
+                <span id="col-resolved-count" class="bg-slate-800 text-on-surface-variant font-label-mono px-2 py-0.5 rounded text-[10px] font-bold">0</span>
+              </div>
+              <div id="kanban-resolved" class="p-4 flex-1 overflow-y-auto space-y-3 min-h-[150px] bg-surface-container-low/20"></div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== 6. AUDIT CYCLES VIEW ==================== -->
+        <section id="view-audits" class="view-section d-none space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Initiate Audit Cycle (1/3) -->
+            <div id="admin-audit-card" class="bg-surface-container-low border border-outline-variant rounded-xl p-6 h-fit" style="display: none;">
+              <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-primary">play_circle</span>
+                <h3 class="font-headline-sm text-sm font-bold text-on-surface">Initiate Audit Cycle</h3>
+              </div>
+              <form id="create-audit-form" class="space-y-4">
+                <div>
+                  <label for="audit-name" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Audit Name</label>
+                  <input type="text" id="audit-name" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" placeholder="e.g. Q3 2026 electronics audit" required>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="audit-start" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Start Date</label>
+                    <input type="date" id="audit-start" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+                  </div>
+                  <div>
+                    <label for="audit-end" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">End Date</label>
+                    <input type="date" id="audit-end" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="audit-scope-type" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Scope Type</label>
+                    <select id="audit-scope-type" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+                      <option value="overall">Overall (All Assets)</option>
+                      <option value="department">Department</option>
+                      <option value="location">Location</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="audit-scope-value" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Scope Value</label>
+                    <input type="text" id="audit-scope-value" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" placeholder="e.g. Engineering">
+                  </div>
+                </div>
+                <div>
+                  <label for="audit-auditors" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Assign Auditors (Multi)</label>
+                  <select id="audit-auditors" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" multiple style="height: 100px;">
+                    <!-- Populated dynamically -->
+                  </select>
+                  <span class="block text-[10px] text-on-surface-variant mt-1.5">Hold Ctrl (Cmd) to select multiple.</span>
+                </div>
+                <button type="submit" class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-semibold py-2 rounded-lg transition-colors text-xs shadow-md active:scale-95 cursor-pointer">Launch Cycle</button>
+              </form>
+            </div>
+
+            <!-- List of Audit Cycles (2/3) -->
+            <div id="audit-cycles-col" class="lg:col-span-2 bg-surface-container-low border border-outline-variant rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-secondary">list</span>
+                <h3 class="font-headline-sm text-sm font-bold text-on-surface">Audit Cycles</h3>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse whitespace-nowrap">
+                  <thead>
+                    <tr class="bg-surface-container-high border-b border-outline-variant font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                      <th class="px-4 py-3 font-medium">Cycle Name</th>
+                      <th class="px-4 py-3 font-medium">Scope</th>
+                      <th class="px-4 py-3 font-medium">Auditors</th>
+                      <th class="px-4 py-3 font-medium">Status</th>
+                      <th class="px-4 py-3 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="audits-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                    <tr>
+                      <td colspan="5" class="px-4 py-6 text-center text-on-surface-variant">Loading audits cycles...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Auditor Workspace Area (Col Span 3, initially hidden) -->
+            <div id="auditor-workspace-card" class="lg:col-span-3 bg-surface-container-low border border-outline-variant rounded-xl p-6" style="display: none;">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800">
+                <h3 class="font-headline-sm text-base font-bold text-emerald-400 flex items-center gap-2">
+                  <span class="material-symbols-outlined">clipboard_check</span>
+                  <span>Auditor Workspace: </span><span id="active-audit-title" class="text-on-surface font-bold">Cycle</span>
+                </h3>
+                <div class="flex gap-2">
+                  <button id="btn-close-audit-cycle" class="bg-error hover:brightness-110 text-on-error px-4 py-2 rounded-lg font-semibold text-xs transition-colors active:scale-95 flex items-center gap-1.5" style="display: none;">
+                    <span class="material-symbols-outlined text-[16px]">lock</span> Close Cycle
+                  </button>
+                  <button id="btn-back-to-audits" class="bg-surface-container border border-outline-variant hover:bg-surface-container-high text-on-surface px-4 py-2 rounded-lg font-semibold text-xs transition-colors active:scale-95 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px]">arrow_back</span> Back
+                  </button>
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse whitespace-nowrap">
+                  <thead>
+                    <tr class="bg-surface-container-high border-b border-outline-variant font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                      <th class="px-6 py-4 font-medium">Asset Tag</th>
+                      <th class="px-6 py-4 font-medium">Asset Name</th>
+                      <th class="px-6 py-4 font-medium">Location</th>
+                      <th class="px-6 py-4 font-medium">Expected Holder</th>
+                      <th class="px-6 py-4 font-medium">Status</th>
+                      <th class="px-6 py-4 font-medium">Audited By</th>
+                      <th class="px-6 py-4 font-medium text-right">Log Verification</th>
+                    </tr>
+                  </thead>
+                  <tbody id="audit-records-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-md">
+                    <!-- Dynamically loaded -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== 7. REPORTS & ANALYTICS VIEW ==================== -->
+        <section id="view-reports" class="view-section d-none space-y-6">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-surface-container border border-outline-variant rounded-xl p-6">
+            <div>
+              <h2 class="font-display-lg text-lg font-bold text-on-surface">Reports & Analytics</h2>
+              <p class="font-body-sm text-xs text-on-surface-variant mt-1">Review active asset allocations, category breakdowns, and retiring units.</p>
+            </div>
+            <a id="btn-export-csv" class="flex items-center gap-2 bg-secondary text-on-secondary hover:brightness-110 px-4 py-2 rounded-lg font-semibold text-xs transition-all shadow-md active:scale-95 cursor-pointer">
+              <span class="material-symbols-outlined text-[18px]">download</span>
+              <span>Export Asset Register CSV</span>
+            </a>
+          </div>
+
+          <!-- Apex Charts Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-primary text-base">pie_chart</span>
+                <h3 class="font-headline-sm text-sm font-semibold text-on-surface">Asset Status Distribution</h3>
+              </div>
+              <div id="chart-utilization" class="min-h-[250px] w-full flex items-center justify-center">
+                <span class="text-on-surface-variant text-xs">Loading Chart...</span>
+              </div>
+            </div>
+            <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-secondary text-base">bar_chart</span>
+                <h3 class="font-headline-sm text-sm font-semibold text-on-surface">Maintenance Issues by Category</h3>
+              </div>
+              <div id="chart-maintenance" class="min-h-[250px] w-full flex items-center justify-center">
+                <span class="text-on-surface-variant text-xs">Loading Chart...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tables Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Most Used -->
+            <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-primary text-base">trending_up</span>
+                <h3 class="font-headline-sm text-sm font-semibold text-on-surface">Most-Used Shared Resources</h3>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="bg-surface-container border-b border-outline-variant/30 font-label-mono text-[10px] text-on-surface-variant uppercase tracking-wider">
+                      <th class="px-4 py-2 font-medium">Tag</th>
+                      <th class="px-4 py-2 font-medium">Resource Name</th>
+                      <th class="px-4 py-2 font-medium">Booking Frequency</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reports-most-used-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Idle Assets -->
+            <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-amber-400 text-base">hourglass_empty</span>
+                <h3 class="font-headline-sm text-sm font-semibold text-on-surface">Idle Assets (Longest Unused)</h3>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="bg-surface-container border-b border-outline-variant/30 font-label-mono text-[10px] text-on-surface-variant uppercase tracking-wider">
+                      <th class="px-4 py-2 font-medium">Tag</th>
+                      <th class="px-4 py-2 font-medium">Asset Name</th>
+                      <th class="px-4 py-2 font-medium">Days Idle</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reports-idle-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Retirement Alerts table -->
+          <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6">
+            <div class="flex items-center gap-2 mb-4 pb-3 border-b border-outline-variant">
+              <span class="material-symbols-outlined text-error text-base">alert_octagon</span>
+              <h3 class="font-headline-sm text-sm font-semibold text-on-surface">Retirement and Scheduled Service Alerts</h3>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-surface-container border-b border-outline-variant/30 font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                    <th class="px-6 py-3 font-medium">Tag</th>
+                    <th class="px-6 py-3 font-medium">Asset Name</th>
+                    <th class="px-6 py-3 font-medium">Acquisition Date</th>
+                    <th class="px-6 py-3 font-medium">Current Condition</th>
+                    <th class="px-6 py-3 font-medium">Status Alert</th>
+                  </tr>
+                </thead>
+                <tbody id="reports-retirement-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 8. ORGANIZATION SETUP (ADMIN ONLY) ==================== -->
+        <section id="view-admin" class="view-section d-none space-y-6">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-surface-container border border-outline-variant rounded-xl p-4">
+            <!-- Navigation Tabs styled from orgsetup.html designs -->
+            <div class="flex flex-wrap gap-2">
+              <button class="tab-btn active" data-tab="tab-departments">Departments</button>
+              <button class="tab-btn" data-tab="tab-categories">Asset Categories</button>
+              <button class="tab-btn" data-tab="tab-employees">Employee Directory</button>
+            </div>
+          </div>
+
+          <!-- Tab A: Department Management -->
+          <div id="tab-departments" class="admin-tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <!-- Form (1/3) -->
+              <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6 h-fit">
+                <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                  <span class="material-symbols-outlined text-primary">add_circle</span>
+                  <h3 class="font-headline-sm text-sm font-bold text-on-surface">Add Department</h3>
+                </div>
+                <form id="create-dept-form" class="space-y-4">
+                  <div>
+                    <label for="dept-name" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Department Name</label>
+                    <input type="text" id="dept-name" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" placeholder="e.g. Finance" required>
+                  </div>
+                  <div>
+                    <label for="dept-parent-id" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Parent Department</label>
+                    <div class="relative">
+                      <select id="dept-parent-id" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary appearance-none text-xs">
+                        <option value="">-- None (Top level) --</option>
+                      </select>
+                      <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+                    </div>
+                  </div>
+                  <button type="submit" class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-semibold py-2 rounded-lg transition-colors text-xs shadow-md active:scale-95 cursor-pointer">Add Department</button>
+                </form>
+              </div>
+              <!-- List (2/3) -->
+              <div class="lg:col-span-2 bg-surface-container-low border border-outline-variant rounded-xl p-6">
+                <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                  <span class="material-symbols-outlined text-secondary">corporate_fare</span>
+                  <h3 class="font-headline-sm text-sm font-bold text-on-surface">Departments List</h3>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left border-collapse whitespace-nowrap">
+                    <thead>
+                      <tr class="bg-surface-container-high border-b border-outline-variant font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                        <th class="px-4 py-3 font-medium">ID</th>
+                        <th class="px-4 py-3 font-medium">Department Name</th>
+                        <th class="px-4 py-3 font-medium">Manager / Head</th>
+                        <th class="px-4 py-3 font-medium">Parent Dept</th>
+                        <th class="px-4 py-3 font-medium">Status</th>
+                        <th class="px-4 py-3 font-medium text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-depts-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                      <!-- Populated dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab B: Asset Category Management -->
+          <div id="tab-categories" class="admin-tab-content d-none">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <!-- Form (1/3) -->
+              <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6 h-fit">
+                <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                  <span class="material-symbols-outlined text-primary">add_circle</span>
+                  <h3 class="font-headline-sm text-sm font-bold text-on-surface">Add Category</h3>
+                </div>
+                <form id="create-cat-form" class="space-y-4">
+                  <div>
+                    <label for="cat-name" class="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Category Name</label>
+                    <input type="text" id="cat-name" class="w-full bg-slate-900 border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" placeholder="e.g. Vehicles" required>
+                  </div>
+                  <button type="submit" class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-semibold py-2 rounded-lg transition-colors text-xs shadow-md active:scale-95 cursor-pointer">Add Category</button>
+                </form>
+              </div>
+              <!-- List (2/3) -->
+              <div class="lg:col-span-2 bg-surface-container-low border border-outline-variant rounded-xl p-6">
+                <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                  <span class="material-symbols-outlined text-secondary">category</span>
+                  <h3 class="font-headline-sm text-sm font-bold text-on-surface">Asset Categories List</h3>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left border-collapse whitespace-nowrap">
+                    <thead>
+                      <tr class="bg-surface-container-high border-b border-outline-variant font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                        <th class="px-6 py-4 font-medium">ID</th>
+                        <th class="px-6 py-4 font-medium">Category Name</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-cats-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                      <!-- Populated dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab C: Employee Directory -->
+          <div id="tab-employees" class="admin-tab-content d-none">
+            <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+                <span class="material-symbols-outlined text-primary">groups</span>
+                <h3 class="font-headline-sm text-sm font-bold text-on-surface">Employee Promotion Board</h3>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse whitespace-nowrap">
+                  <thead>
+                    <tr class="bg-surface-container-high border-b border-outline-variant font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                      <th class="px-6 py-4 font-medium">Name</th>
+                      <th class="px-6 py-4 font-medium">Email</th>
+                      <th class="px-6 py-4 font-medium">Department</th>
+                      <th class="px-6 py-4 font-medium">Current Role</th>
+                      <th class="px-6 py-4 font-medium">Status</th>
+                      <th class="px-6 py-4 font-medium text-right">Promote / Update Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-employees-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 9. NOTIFICATIONS FEED VIEW ==================== -->
+        <section id="view-notifications" class="view-section d-none space-y-6">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-surface-container border border-outline-variant rounded-xl p-6">
+            <div>
+              <h2 class="font-display-lg text-lg font-bold text-on-surface">Notifications Feed</h2>
+              <p class="font-body-sm text-xs text-on-surface-variant mt-1">Review system alerts, maintenance updates, and approvals.</p>
+            </div>
+            <div class="relative">
+              <select id="notif-filter" class="appearance-none bg-slate-900 border border-outline-variant rounded-lg pl-4 pr-10 py-2 text-on-surface font-body-md focus:outline-none focus:border-primary cursor-pointer text-xs">
+                <option value="All">All Notifications</option>
+                <option value="Alerts">Alerts (Overdue/Audits)</option>
+                <option value="Approvals">Approvals (Transfers/Maint)</option>
+                <option value="Bookings">Bookings</option>
+              </select>
+              <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+            </div>
+          </div>
+
+          <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6">
+            <div id="notifications-list-container" class="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+              <div class="text-center py-6 text-on-surface-variant text-xs">No notifications.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 10. SYSTEM ACTIVITY LOGS VIEW ==================== -->
+        <section id="view-logs" class="view-section d-none space-y-6">
+          <div class="bg-surface-container-low border border-outline-variant rounded-xl p-6">
+            <div class="flex items-center gap-2 mb-6 pb-4 border-b border-outline-variant">
+              <span class="material-symbols-outlined text-primary">file_text</span>
+              <h3 class="font-headline-sm text-sm font-bold text-on-surface">System Activity Logs</h3>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse whitespace-nowrap">
+                <thead>
+                  <tr class="bg-surface-container border-b border-outline-variant/30 font-label-mono text-xs text-on-surface-variant uppercase tracking-wider">
+                    <th class="px-6 py-4 font-medium">Log ID</th>
+                    <th class="px-6 py-4 font-medium">Actor</th>
+                    <th class="px-6 py-4 font-medium">Action</th>
+                    <th class="px-6 py-4 font-medium">Details</th>
+                    <th class="px-6 py-4 font-medium text-right">Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody id="logs-tbody" class="divide-y divide-outline-variant/30 text-on-surface text-xs font-body-sm">
+                  <tr>
+                    <td colspan="5" class="px-6 py-6 text-center text-on-surface-variant">Loading system logs...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- Modal A: Register Asset Modal -->
+  <div class="modal-overlay" id="modal-register-asset">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="text-base font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">add_circle</span>
+          <span>Register New Asset</span>
+        </h3>
+        <button class="modal-close text-on-surface-variant hover:text-on-surface text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+      <form id="register-asset-form">
+        <div class="modal-body">
+          <div>
+            <label for="reg-name" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Asset Name</label>
+            <input type="text" id="reg-name" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" placeholder="e.g. MacBook Pro 16" required>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="reg-category" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Category</label>
+              <select id="reg-category" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required></select>
+            </div>
+            <div>
+              <label for="reg-serial" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Serial Number</label>
+              <input type="text" id="reg-serial" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" placeholder="e.g. SN-XYZ..." required>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="reg-location" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Initial Location</label>
+              <input type="text" id="reg-location" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" placeholder="e.g. HQ Floor 3" required>
+            </div>
+            <div>
+              <label for="reg-cost" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Acquisition Cost ($)</label>
+              <input type="number" step="0.01" id="reg-cost" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" value="0.00" required>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="reg-date" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Acquisition Date</label>
+              <input type="date" id="reg-date" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+            </div>
+            <div>
+              <label for="reg-condition" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Condition</label>
+              <select id="reg-condition" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+                <option value="New">New</option>
+                <option value="Good" selected>Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Damaged">Damaged</option>
+                <option value="Broken">Broken</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 pt-2">
+            <input type="checkbox" id="reg-shared" class="w-4 h-4 rounded text-primary focus:ring-primary bg-slate-950 border-slate-850 cursor-pointer">
+            <label for="reg-shared" class="text-xs text-on-surface-variant cursor-pointer">Mark as shared/bookable resource</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="px-4 py-2 rounded-lg border border-slate-800 text-on-surface hover:bg-slate-800 text-xs font-semibold modal-cancel cursor-pointer">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-on-primary hover:brightness-110 text-xs font-semibold cursor-pointer">Register Asset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal B: Asset Details & History Modal -->
+  <div class="modal-overlay" id="modal-asset-details">
+    <div class="modal-container max-w-3xl">
+      <div class="modal-header">
+        <h3 id="details-asset-tag" class="text-base font-bold text-on-surface font-label-mono">Asset Details</h3>
+        <button class="modal-close text-on-surface-variant hover:text-on-surface text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+      <div class="modal-body space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Text details (2/3 width) -->
+          <div class="md:col-span-2 space-y-4">
+            <h4 id="details-asset-name" class="text-base font-bold text-on-surface">Asset Name</h4>
+            <div class="grid grid-cols-2 gap-4 text-xs text-on-surface-variant">
+              <div><strong class="text-slate-500">Category:</strong> <span id="details-category">Category</span></div>
+              <div><strong class="text-slate-500">Serial:</strong> <span id="details-serial">Serial</span></div>
+              <div><strong class="text-slate-500">Status:</strong> <span id="details-status">Status</span></div>
+              <div><strong class="text-slate-500">Condition:</strong> <span id="details-condition">Condition</span></div>
+              <div><strong class="text-slate-500">Location:</strong> <span id="details-location">Location</span></div>
+              <div><strong class="text-slate-500">Acq. Cost:</strong> <span id="details-cost">Cost</span></div>
+              <div><strong class="text-slate-500">Acq. Date:</strong> <span id="details-date">Date</span></div>
+              <div><strong class="text-slate-500">Current Holder:</strong> <span id="details-holder">None</span></div>
+            </div>
+            
+            <!-- Quick allocation/return buttons -->
+            <div id="details-quick-actions" class="pt-2 flex gap-2">
+              <button id="btn-details-allocate" class="px-3.5 py-1.5 rounded-lg bg-primary text-on-primary hover:brightness-110 text-xs font-semibold transition-all">Allocate</button>
+              <button id="btn-details-return" class="px-3.5 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-on-surface hover:bg-slate-700 text-xs font-semibold transition-all">Mark Returned</button>
+            </div>
+          </div>
+          
+          <!-- QR card (1/3 width) -->
+          <div class="bg-slate-950 border border-slate-900 rounded-xl p-4 flex flex-col items-center justify-center text-center">
+            <img id="details-qr-img" src="" alt="Asset QR Code" class="w-28 h-28 object-contain bg-white p-1.5 rounded-lg mb-2">
+            <span id="details-qr-text" class="text-[9px] font-label-mono text-on-surface-variant break-all">ASSETFLOW:AF-XXXX...</span>
+          </div>
+        </div>
+
+        <!-- History Tabs -->
+        <div class="flex gap-2 border-b border-slate-800 pb-2">
+          <button class="px-3 py-1 rounded-full border border-primary text-primary bg-primary/10 font-body-sm text-xs transition-colors cursor-pointer" id="btn-tab-allocation-history">Allocation History</button>
+          <button class="px-3 py-1 rounded-full border border-outline-variant text-on-surface-variant hover:bg-slate-800 font-body-sm text-xs transition-colors cursor-pointer" id="btn-tab-maintenance-history">Maintenance Tickets</button>
+        </div>
+
+        <!-- Allocation History Panel -->
+        <div id="panel-allocation-history" class="overflow-x-auto max-h-[220px]">
+          <table class="w-full text-left border-collapse whitespace-nowrap">
+            <thead>
+              <tr class="bg-slate-950 border-b border-slate-850 font-label-mono text-[10px] text-on-surface-variant uppercase">
+                <th class="px-4 py-2 font-medium">Holder</th>
+                <th class="px-4 py-2 font-medium">Department</th>
+                <th class="px-4 py-2 font-medium">Allocated On</th>
+                <th class="px-4 py-2 font-medium">Returned On</th>
+                <th class="px-4 py-2 font-medium">Condition</th>
+                <th class="px-4 py-2 font-medium">Check-in Notes</th>
+              </tr>
+            </thead>
+            <tbody id="details-alloc-history-tbody" class="divide-y divide-slate-850 text-on-surface text-[11px] font-body-sm">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Maintenance History Panel -->
+        <div id="panel-maintenance-history" class="overflow-x-auto max-h-[220px] d-none">
+          <table class="w-full text-left border-collapse whitespace-nowrap">
+            <thead>
+              <tr class="bg-slate-950 border-b border-slate-850 font-label-mono text-[10px] text-on-surface-variant uppercase">
+                <th class="px-4 py-2 font-medium">Issue Description</th>
+                <th class="px-4 py-2 font-medium">Priority</th>
+                <th class="px-4 py-2 font-medium">Reporter</th>
+                <th class="px-4 py-2 font-medium">Status</th>
+                <th class="px-4 py-2 font-medium">Assigned Tech</th>
+                <th class="px-4 py-2 font-medium">Resolution Notes</th>
+              </tr>
+            </thead>
+            <tbody id="details-maint-history-tbody" class="divide-y divide-slate-850 text-on-surface text-[11px] font-body-sm">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="px-4 py-2 rounded-lg border border-slate-800 text-on-surface hover:bg-slate-800 transition-colors text-sm font-semibold modal-cancel cursor-pointer">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal C: Check-in / Return Asset Modal -->
+  <div class="modal-overlay" id="modal-return-asset">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="text-base font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-success">corner_down_left</span>
+          <span>Return Asset Check-in</span>
+        </h3>
+        <button class="modal-close text-on-surface-variant hover:text-on-surface text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+      <form id="return-asset-form">
+        <input type="hidden" id="return-asset-id-hidden">
+        <div class="modal-body">
+          <p id="return-asset-prompt" class="text-xs text-on-surface-variant leading-relaxed">
+            Please fill in check-in parameters for asset <strong>AF-XXXX</strong>.
+          </p>
+          <div>
+            <label for="ret-condition" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Check-in Condition</label>
+            <select id="ret-condition" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+              <option value="New">New</option>
+              <option value="Good" selected>Good</option>
+              <option value="Fair">Fair</option>
+              <option value="Damaged">Damaged</option>
+              <option value="Broken">Broken</option>
+            </select>
+          </div>
+          <div>
+            <label for="ret-notes" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Check-in Notes / Observations</label>
+            <textarea id="ret-notes" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" rows="3" placeholder="e.g. Scratches on lid, returned with charger."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="px-4 py-2 rounded-lg border border-slate-800 text-on-surface hover:bg-slate-800 text-xs font-semibold modal-cancel cursor-pointer">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-500 text-xs font-semibold cursor-pointer">Complete Check-in</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal D: Raise Maintenance Ticket Modal -->
+  <div class="modal-overlay" id="modal-raise-maintenance">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="text-base font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-error">report_problem</span>
+          <span>Raise Maintenance Request</span>
+        </h3>
+        <button class="modal-close text-on-surface-variant hover:text-on-surface text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+      <form id="raise-maintenance-form">
+        <div class="modal-body">
+          <div>
+            <label for="maint-asset-id" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Select Damaged/Broken Asset</label>
+            <div class="relative">
+              <select id="maint-asset-id" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary appearance-none text-xs" required>
+                <option value="">-- Choose Asset --</option>
+              </select>
+              <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+            </div>
+          </div>
+          <div>
+            <label for="maint-priority" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Urgency / Priority</label>
+            <select id="maint-priority" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+          <div>
+            <label for="maint-desc" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Describe the Problem / Issue</label>
+            <textarea id="maint-desc" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" rows="4" placeholder="Be detailed (e.g. Screen flickering, laptop will not charge, van tire puncture...)" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="px-4 py-2 rounded-lg border border-slate-800 text-on-surface hover:bg-slate-800 text-xs font-semibold modal-cancel cursor-pointer">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-on-primary hover:brightness-110 text-xs font-semibold cursor-pointer">Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal E: Promote Employee / Update Role Modal (Admin) -->
+  <div class="modal-overlay" id="modal-promote-employee">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="text-base font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">manage_accounts</span>
+          <span>Update Employee Profile</span>
+        </h3>
+        <button class="modal-close text-on-surface-variant hover:text-on-surface text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+      <form id="promote-employee-form">
+        <input type="hidden" id="promote-emp-id-hidden">
+        <div class="modal-body">
+          <h4 id="promote-emp-name" class="font-semibold text-sm text-on-surface">Employee Name</h4>
+          <div>
+            <label for="promote-role" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Access Role</label>
+            <select id="promote-role" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+              <option value="employee">Employee</option>
+              <option value="department_head">Department Head</option>
+              <option value="asset_manager">Asset Manager</option>
+              <option value="admin">Administrator</option>
+            </select>
+          </div>
+          <div>
+            <label SAFE for="promote-dept" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Assign Department</label>
+            <div class="relative">
+              <select id="promote-dept" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary appearance-none text-xs">
+                <option value="">-- Unassigned / None --</option>
+              </select>
+              <span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+            </div>
+          </div>
+          <div>
+            <label for="promote-status" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Status</label>
+            <select id="promote-status" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="px-4 py-2 rounded-lg border border-slate-800 text-on-surface hover:bg-slate-800 text-xs font-semibold modal-cancel cursor-pointer">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-on-primary hover:brightness-110 text-xs font-semibold cursor-pointer">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal F: Manage Maintenance Request Modal -->
+  <div class="modal-overlay" id="modal-manage-maintenance">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="text-base font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">edit_note</span>
+          <span>Manage Maintenance Ticket</span>
+        </h3>
+        <button class="modal-close text-on-surface-variant hover:text-on-surface text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+      <form id="manage-maintenance-form">
+        <input type="hidden" id="manage-maint-id-hidden">
+        <div class="modal-body space-y-4">
+          <div class="text-xs text-on-surface-variant space-y-1.5 bg-slate-950/60 p-3 rounded-lg border border-slate-850">
+            <p><strong>Asset:</strong> <span id="manage-maint-asset" class="text-on-surface">Asset Tag</span></p>
+            <p><strong>Reported By:</strong> <span id="manage-maint-reporter" class="text-on-surface">Reporter</span></p>
+            <p class="pt-2"><strong>Issue Description:</strong></p>
+            <p id="manage-maint-desc" class="text-slate-400 bg-slate-900 p-2.5 rounded border border-slate-800 font-sans italic mt-1 text-[11px] leading-relaxed">Description</p>
+          </div>
+          <div>
+            <label for="manage-maint-status" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Ticket Status</label>
+            <select id="manage-maint-status" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" required>
+              <option value="Pending">Pending Approval</option>
+              <option value="Approved">Approved / Scheduled</option>
+              <option value="Rejected">Rejected</option>
+              <option value="Technician Assigned">Technician Assigned</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+          <div>
+            <label for="manage-maint-tech" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Assigned Technician Name</label>
+            <input type="text" id="manage-maint-tech" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" placeholder="e.g. Ramesh Kumar">
+          </div>
+          <div>
+            <label for="manage-maint-notes" class="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1.5">Resolution Notes</label>
+            <textarea id="manage-maint-notes" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:border-primary text-xs" rows="3" placeholder="Explain how it was fixed (required if marking Resolved)"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="px-4 py-2 rounded-lg border border-slate-800 text-on-surface hover:bg-slate-800 text-xs font-semibold modal-cancel cursor-pointer">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-on-primary hover:brightness-110 text-xs font-semibold cursor-pointer">Update Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile navigation sidebar slide script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const burger = document.getElementById('mobile-menu-btn');
+      const sidebar = document.getElementById('sidebar-nav');
+      if (burger && sidebar) {
+        burger.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+          sidebar.classList.toggle('flex');
+        });
+        
+        // Close sidebar when clicking links on mobile
+        sidebar.querySelectorAll('.sidebar-item').forEach(item => {
+          item.addEventListener('click', () => {
+            if (window.innerWidth < 768) {
+              sidebar.classList.add('hidden');
+              sidebar.classList.remove('flex');
+            }
+          });
+        });
+      }
+      
+      // Wire shortcuts for opening modals from assets view
+      const qaRegister = document.getElementById('qa-register-shortcut');
+      if (qaRegister) {
+        qaRegister.addEventListener('click', () => {
+          const registerBtn = document.getElementById('btn-open-register-modal');
+          if (registerBtn) registerBtn.click();
+        });
+      }
+
+      // Sync mobile bell with desk bell action
+      const mobileBell = document.getElementById('mobile-bell-icon');
+      if (mobileBell) {
+        mobileBell.addEventListener('click', () => {
+          const bell = document.getElementById('bell-icon');
+          if (bell) bell.click();
+        });
+      }
+    });
+  </script>
+
+  <!-- Javascript SPA Controller entrypoint -->
+  <script src="app.js" type="module"></script>
+</body>
+</html>
