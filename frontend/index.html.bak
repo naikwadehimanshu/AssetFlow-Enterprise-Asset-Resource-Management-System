@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssetFlow - Enterprise Asset & Resource Management</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- ApexCharts CDN for Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+
+  <!-- ==================== TOAST NOTIFICATIONS ==================== -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ==================== AUTHENTICATION CONTAINER ==================== -->
+  <div id="auth-container" class="auth-container">
+    <!-- Login Card -->
+    <div id="login-card" class="auth-card">
+      <div class="auth-logo">
+        <div class="flex align-center justify-center mb-4">
+          <div class="sidebar-brand-icon">AF</div>
+        </div>
+        <h2>AssetFlow</h2>
+        <p>Enterprise Asset & Resource Manager</p>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-email">Email Address</label>
+          <input type="email" id="login-email" class="input-control" placeholder="name@company.com" required value="admin@company.com">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" class="input-control" placeholder="••••••••" required value="password123">
+        </div>
+        <button type="submit" class="btn btn-block">Log In</button>
+      </form>
+      <div class="auth-footer">
+        Don't have an account? <a href="#" id="show-signup">Create Employee Account</a>
+      </div>
+    </div>
+
+    <!-- Signup Card -->
+    <div id="signup-card" class="auth-card d-none">
+      <div class="auth-logo">
+        <div class="flex align-center justify-center mb-4">
+          <div class="sidebar-brand-icon">AF</div>
+        </div>
+        <h2>Create Account</h2>
+        <p>Join your organization's directory</p>
+      </div>
+      <form id="signup-form">
+        <div class="form-group">
+          <label for="signup-name">Full Name</label>
+          <input type="text" id="signup-name" class="input-control" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-email">Email Address</label>
+          <input type="email" id="signup-email" class="input-control" placeholder="name@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" class="input-control" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-block">Sign Up</button>
+      </form>
+      <div class="auth-footer">
+        Already have an account? <a href="#" id="show-login">Log In</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APPLICATION LAYOUT ==================== -->
+  <div id="app-wrapper" class="app-wrapper d-none">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">AF</div>
+        <span class="sidebar-brand-name">AssetFlow</span>
+      </div>
+      <ul class="sidebar-menu">
+        <li class="sidebar-item active" data-view="dashboard">
+          <a><i data-lucide="layout-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="sidebar-item" data-view="assets">
+          <a><i data-lucide="database"></i> Assets Directory</a>
+        </li>
+        <li class="sidebar-item" data-view="allocations">
+          <a><i data-lucide="git-pull-request"></i> Allocations</a>
+        </li>
+        <li class="sidebar-item" data-view="bookings">
+          <a><i data-lucide="calendar"></i> Bookings</a>
+        </li>
+        <li class="sidebar-item" data-view="maintenance">
+          <a><i data-lucide="tool"></i> Maintenance</a>
+        </li>
+        <li class="sidebar-item" data-view="audits">
+          <a><i data-lucide="clipboard-check"></i> Audit Cycles</a>
+        </li>
+        <li class="sidebar-item" data-view="reports" id="nav-reports">
+          <a><i data-lucide="bar-chart-2"></i> Reports & Analytics</a>
+        </li>
+        <li class="sidebar-item" data-view="admin" id="nav-admin">
+          <a><i data-lucide="settings"></i> Organization Setup</a>
+        </li>
+        <li class="sidebar-item" data-view="logs" id="nav-logs">
+          <a><i data-lucide="file-text"></i> System Logs</a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div id="user-avatar" class="user-avatar">AD</div>
+          <div class="user-info">
+            <div id="sidebar-user-name" class="user-name">Loading...</div>
+            <span id="sidebar-user-role" class="user-role">role</span>
+          </div>
+          <button id="btn-logout" class="btn-logout" title="Log Out">
+            <i data-lucide="log-out"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Main Header -->
+      <header class="main-header">
+        <div class="header-title-area">
+          <h2 id="current-view-title">Dashboard</h2>
+        </div>
+        <div class="header-actions">
+          <div class="notif-bell" id="bell-icon" data-view="notifications">
+            <i data-lucide="bell"></i>
+            <span id="notif-count" class="notif-badge d-none">0</span>
+          </div>
+          <div class="user-name" id="header-user-display" style="font-weight: 500;">User Display</div>
+        </div>
+      </header>
+
+      <!-- View Body -->
+      <div class="view-body">
+
+        <!-- ==================== 1. DASHBOARD VIEW ==================== -->
+        <section id="view-dashboard" class="view-section">
+          <!-- KPI Row -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon" style="background: var(--success-glow); color: var(--success);">
+                <i data-lucide="check-circle"></i>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-value" id="kpi-avail">0</div>
+                <div class="kpi-label">Assets Available</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon" style="background: var(--info-glow); color: var(--info);">
+                <i data-lucide="user-check"></i>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-value" id="kpi-alloc">0</div>
+                <div class="kpi-label">Assets Allocated</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon" style="background: var(--warning-glow); color: var(--warning);">
+                <i data-lucide="alert-triangle"></i>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-value" id="kpi-maint">0</div>
+                <div class="kpi-label">Under Maintenance</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon" style="background: var(--primary-glow); color: var(--primary);">
+                <i data-lucide="calendar"></i>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-value" id="kpi-bookings">0</div>
+                <div class="kpi-label">Active Bookings</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon" style="background: var(--secondary-glow); color: var(--secondary);">
+                <i data-lucide="git-pull-request"></i>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-value" id="kpi-transfers">0</div>
+                <div class="kpi-label">Pending Transfers</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dashboard Content Sections -->
+          <div class="dashboard-sections">
+            <!-- Overdue Returns (Important) -->
+            <div class="dashboard-card" style="grid-column: span 1;">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title text-danger"><i data-lucide="clock"></i> Overdue Return Alerts</h3>
+                <span id="overdue-count" class="badge badge-lost">0 items</span>
+              </div>
+              <div class="table-container" style="border: none; margin: 0;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Asset Tag</th>
+                      <th>Asset Name</th>
+                      <th>Current Holder</th>
+                      <th>Expected Return</th>
+                      <th>Overdue Days</th>
+                    </tr>
+                  </thead>
+                  <tbody id="overdue-tbody">
+                    <tr>
+                      <td colspan="5" class="text-center" style="color: var(--text-muted);">No overdue returns. Good job!</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Quick Actions & Side Column -->
+            <div>
+              <div class="dashboard-card">
+                <div class="dashboard-card-header">
+                  <h3 class="dashboard-card-title"><i data-lucide="zap"></i> Quick Actions</h3>
+                </div>
+                <div class="action-grid">
+                  <div class="action-card" id="qa-register">
+                    <span class="icon"><i data-lucide="plus-circle"></i></span>
+                    <span class="label">Register Asset</span>
+                  </div>
+                  <div class="action-card" id="qa-book">
+                    <span class="icon"><i data-lucide="calendar"></i></span>
+                    <span class="label">Book Resource</span>
+                  </div>
+                  <div class="action-card" id="qa-maint">
+                    <span class="icon"><i data-lucide="tool"></i></span>
+                    <span class="label">Report Issue</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- General summary info -->
+              <div class="dashboard-card">
+                <div class="dashboard-card-header">
+                  <h3 class="dashboard-card-title"><i data-lucide="info"></i> Quick Overview</h3>
+                </div>
+                <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted);">
+                  Welcome to <strong>AssetFlow</strong>. Use this panel to track assets, schedule bookings, approve transfers, log maintenance tickets, and complete audit verifications. Use the sidebar to navigate the different modules.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================== 2. ASSETS DIRECTORY VIEW ==================== -->
+        <section id="view-assets" class="view-section d-none">
+          <!-- Filters & Header actions -->
+          <div class="filter-panel">
+            <div class="filter-group">
+              <label for="asset-filter-search">Search</label>
+              <input type="text" id="asset-filter-search" class="input-control" placeholder="Tag, Serial, Name...">
+            </div>
+            <div class="filter-group">
+              <label for="asset-filter-category">Category</label>
+              <select id="asset-filter-category" class="input-control">
+                <option value="">All Categories</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="asset-filter-status">Status</label>
+              <select id="asset-filter-status" class="input-control">
+                <option value="">All Statuses</option>
+                <option value="Available">Available</option>
+                <option value="Allocated">Allocated</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Under Maintenance">Under Maintenance</option>
+                <option value="Lost">Lost</option>
+                <option value="Retired">Retired</option>
+                <option value="Disposed">Disposed</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="asset-filter-dept">Department</label>
+              <select id="asset-filter-dept" class="input-control">
+                <option value="">All Departments</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="asset-filter-location">Location</label>
+              <input type="text" id="asset-filter-location" class="input-control" placeholder="Bengaluru, Floor 2 etc.">
+            </div>
+            <div>
+              <button id="btn-search-assets" class="btn"><i data-lucide="search"></i> Filter</button>
+            </div>
+          </div>
+
+          <div class="flex justify-between align-center mb-4">
+            <h3>Registered Assets</h3>
+            <button id="btn-open-register-modal" class="btn d-none"><i data-lucide="plus"></i> Register New Asset</button>
+          </div>
+
+          <!-- Assets Table -->
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tag Number</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Condition</th>
+                  <th>Location</th>
+                  <th>Current Holder</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="assets-tbody">
+                <tr>
+                  <td colspan="8" class="text-center">Loading assets...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+
+        <!-- ==================== 3. ALLOCATIONS VIEW ==================== -->
+        <section id="view-allocations" class="view-section d-none">
+          <div class="dashboard-sections">
+            <!-- Allocate Asset Form -->
+            <div class="dashboard-card" id="allocation-form-card" style="display: none;">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="user-plus"></i> Allocate Asset</h3>
+              </div>
+              
+              <!-- Double Allocation Warning Block -->
+              <div id="double-allocation-alert" class="conflict-alert">
+                Already Allocated. Direct re-allocation is blocked - submit a transfer request below.
+              </div>
+
+              <form id="allocate-asset-form">
+                <div class="form-group">
+                  <label for="alloc-asset-id">Select Asset</label>
+                  <select id="alloc-asset-id" class="input-control" required>
+                    <option value="">-- Choose Asset --</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="alloc-emp-id">Allocate to Employee</label>
+                  <select id="alloc-emp-id" class="input-control">
+                    <option value="">-- Optional (Can allocate to department) --</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="alloc-dept-id">Department</label>
+                  <select id="alloc-dept-id" class="input-control">
+                    <option value="">-- Optional (Auto-fills from employee) --</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="alloc-return-date">Expected Return Date</label>
+                  <input type="date" id="alloc-return-date" class="input-control">
+                </div>
+                <div class="flex gap-2">
+                  <button type="submit" id="btn-submit-alloc" class="btn">Confirm Allocation</button>
+                  <button type="button" id="btn-submit-transfer-req" class="btn btn-secondary" style="display: none;">Request Asset Transfer</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Transfer Requests (Inbox) -->
+            <div class="dashboard-card" style="grid-column: span 2;">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="git-pull-request"></i> Transfer Requests Inbox</h3>
+              </div>
+              <div class="table-container" style="border: none; margin: 0;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Asset</th>
+                      <th>From Employee</th>
+                      <th>To Employee</th>
+                      <th>Reason</th>
+                      <th>Date Requested</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="transfers-tbody">
+                    <tr>
+                      <td colspan="7" class="text-center">Loading transfer requests...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================== 4. RESOURCE BOOKINGS VIEW ==================== -->
+        <section id="view-bookings" class="view-section d-none">
+          <div class="dashboard-sections" style="grid-template-columns: 1fr 2fr;">
+            <!-- Book Resource Form -->
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="clock"></i> Book Shared Resource</h3>
+              </div>
+              <form id="book-resource-form">
+                <div class="form-group">
+                  <label for="book-asset-id">Shared Resource</label>
+                  <select id="book-asset-id" class="input-control" required>
+                    <option value="">-- Select Shared Asset --</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="book-start">Start Time</label>
+                  <input type="datetime-local" id="book-start" class="input-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="book-end">End Time</label>
+                  <input type="datetime-local" id="book-end" class="input-control" required>
+                </div>
+                <button type="submit" class="btn btn-block">Confirm Booking</button>
+              </form>
+            </div>
+
+            <!-- Active Bookings List / Calendar view -->
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="calendar"></i> Booking Schedule</h3>
+              </div>
+              
+              <div class="booking-calendar" id="bookings-schedule-container">
+                <div class="text-center" style="padding: 20px; color: var(--text-muted);">
+                  Loading booking schedules...
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================== 5. MAINTENANCE VIEW ==================== -->
+        <section id="view-maintenance" class="view-section d-none">
+          <div class="flex justify-between align-center mb-4">
+            <h3>Maintenance & Repair Board</h3>
+            <button id="btn-open-maint-modal" class="btn"><i data-lucide="alert-triangle"></i> Raise Maintenance Request</button>
+          </div>
+
+          <!-- Kanban Board -->
+          <div class="kanban-board">
+            <!-- Column 1: Pending -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span>Pending Approval</span>
+                <span id="col-pending-count" class="badge">0</span>
+              </div>
+              <div class="kanban-cards-wrapper" id="kanban-pending"></div>
+            </div>
+
+            <!-- Column 2: Approved / Scheduled -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span>Approved / Assigned</span>
+                <span id="col-assigned-count" class="badge">0</span>
+              </div>
+              <div class="kanban-cards-wrapper" id="kanban-assigned"></div>
+            </div>
+
+            <!-- Column 3: In Progress -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span>In Progress</span>
+                <span id="col-progress-count" class="badge">0</span>
+              </div>
+              <div class="kanban-cards-wrapper" id="kanban-progress"></div>
+            </div>
+
+            <!-- Column 4: Resolved -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span>Resolved</span>
+                <span id="col-resolved-count" class="badge">0</span>
+              </div>
+              <div class="kanban-cards-wrapper" id="kanban-resolved"></div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================== 6. AUDIT CYCLES VIEW ==================== -->
+        <section id="view-audits" class="view-section d-none">
+          <div class="dashboard-sections" style="grid-template-columns: 1fr 1fr;">
+            <!-- Start Audit Cycle (Admin Only) -->
+            <div class="dashboard-card" id="admin-audit-card" style="display: none;">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="play-circle"></i> Initiate Audit Cycle</h3>
+              </div>
+              <form id="create-audit-form">
+                <div class="form-group">
+                  <label for="audit-name">Audit Cycle Name</label>
+                  <input type="text" id="audit-name" class="input-control" placeholder="e.g. Q3 2026 Electronics Audit" required>
+                </div>
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label for="audit-start">Start Date</label>
+                    <input type="date" id="audit-start" class="input-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="audit-end">End Date</label>
+                    <input type="date" id="audit-end" class="input-control" required>
+                  </div>
+                </div>
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label for="audit-scope-type">Scope Type</label>
+                    <select id="audit-scope-type" class="input-control" required>
+                      <option value="overall">Overall (All Assets)</option>
+                      <option value="department">Department</option>
+                      <option value="location">Location</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="audit-scope-value">Scope Value</label>
+                    <input type="text" id="audit-scope-value" class="input-control" placeholder="e.g. Engineering or Bengaluru">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="audit-auditors">Assign Auditors (Multi-select)</label>
+                  <select id="audit-auditors" class="input-control" multiple style="height: 100px;">
+                    <!-- Populated dynamically -->
+                  </select>
+                  <span style="font-size: 11px; color: var(--text-dark); margin-top: 4px;">Hold Ctrl (Cmd) to select multiple auditors.</span>
+                </div>
+                <button type="submit" class="btn btn-block">Launch Audit Cycle</button>
+              </form>
+            </div>
+
+            <!-- List of Audit Cycles -->
+            <div class="dashboard-card" style="grid-column: span 1;" id="audit-cycles-col">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="list"></i> Audit Cycles</h3>
+              </div>
+              <div class="table-container" style="border: none; margin: 0;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Cycle Name</th>
+                      <th>Scope</th>
+                      <th>Auditors</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="audits-tbody">
+                    <tr>
+                      <td colspan="5" class="text-center">Loading audit cycles...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Auditor Workspace Area -->
+            <div class="dashboard-card" id="auditor-workspace-card" style="grid-column: span 2; display: none;">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title text-success"><i data-lucide="clipboard-check"></i> Auditor Workspace: <span id="active-audit-title">Cycle</span></h3>
+                <div>
+                  <button id="btn-close-audit-cycle" class="btn btn-danger" style="display: none;">Close Cycle & Lock Data</button>
+                  <button id="btn-back-to-audits" class="btn btn-secondary">Back to Cycles</button>
+                </div>
+              </div>
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Asset Tag</th>
+                      <th>Asset Name</th>
+                      <th>Location</th>
+                      <th>Expected Holder</th>
+                      <th>Status</th>
+                      <th>Audited By</th>
+                      <th>Log Verification</th>
+                    </tr>
+                  </thead>
+                  <tbody id="audit-records-tbody">
+                    <!-- Loaded dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================== 7. REPORTS & ANALYTICS VIEW ==================== -->
+        <section id="view-reports" class="view-section d-none">
+          <div class="flex justify-between align-center mb-4">
+            <h3>Analytics Dashboard</h3>
+            <a id="btn-export-csv" class="btn btn-secondary"><i data-lucide="download"></i> Export Asset Register CSV</a>
+          </div>
+
+          <!-- Analytic Charts -->
+          <div class="dashboard-sections" style="grid-template-columns: 1fr 1fr; margin-bottom: 24px;">
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="pie-chart"></i> Asset Status Distribution</h3>
+              </div>
+              <div id="chart-utilization" style="min-height: 250px;"></div>
+            </div>
+
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="activity"></i> Maintenance Issues by Category</h3>
+              </div>
+              <div id="chart-maintenance" style="min-height: 250px;"></div>
+            </div>
+          </div>
+
+          <div class="dashboard-sections" style="grid-template-columns: 1fr 1fr; margin-bottom: 24px;">
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title"><i data-lucide="trending-up"></i> Most-Used Shared Resources</h3>
+              </div>
+              <div class="table-container" style="border: none; margin: 0;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Tag</th>
+                      <th>Resource Name</th>
+                      <th>Booking Frequency</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reports-most-used-tbody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title text-warning"><i data-lucide="clock"></i> Idle Assets (Longest Unused)</h3>
+              </div>
+              <div class="table-container" style="border: none; margin: 0;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Tag</th>
+                      <th>Asset Name</th>
+                      <th>Days Idle</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reports-idle-tbody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nearing retirement alerts -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title text-danger"><i data-lucide="alert-octagon"></i> Retirement and Scheduled Service Alerts</h3>
+            </div>
+            <div class="table-container" style="border: none; margin: 0;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Tag</th>
+                    <th>Asset Name</th>
+                    <th>Acquisition Date</th>
+                    <th>Current Condition</th>
+                    <th>Status Alert</th>
+                  </tr>
+                </thead>
+                <tbody id="reports-retirement-tbody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================== 8. ORGANIZATION SETUP (ADMIN ONLY) ==================== -->
+        <section id="view-admin" class="view-section d-none">
+          <div class="tabs-header">
+            <button class="tab-btn active" data-tab="tab-departments">Departments</button>
+            <button class="tab-btn" data-tab="tab-categories">Asset Categories</button>
+            <button class="tab-btn" data-tab="tab-employees">Employee Directory</button>
+          </div>
+
+          <!-- Tab A: Department Management -->
+          <div id="tab-departments" class="admin-tab-content">
+            <div class="dashboard-sections" style="grid-template-columns: 1fr 2fr;">
+              <div class="dashboard-card">
+                <div class="dashboard-card-header">
+                  <h3 class="dashboard-card-title">Add Department</h3>
+                </div>
+                <form id="create-dept-form">
+                  <div class="form-group">
+                    <label for="dept-name">Department Name</label>
+                    <input type="text" id="dept-name" class="input-control" placeholder="e.g. Finance" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="dept-parent-id">Parent Department</label>
+                    <select id="dept-parent-id" class="input-control">
+                      <option value="">-- None (Top level) --</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-block">Add Department</button>
+                </form>
+              </div>
+
+              <div class="dashboard-card">
+                <div class="dashboard-card-header">
+                  <h3 class="dashboard-card-title">Departments List</h3>
+                </div>
+                <div class="table-container" style="border: none; margin: 0;">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Department Name</th>
+                        <th>Manager / Head</th>
+                        <th>Parent Dept</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-depts-tbody">
+                      <!-- Populated dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab B: Asset Category Management -->
+          <div id="tab-categories" class="admin-tab-content d-none">
+            <div class="dashboard-sections" style="grid-template-columns: 1fr 2fr;">
+              <div class="dashboard-card">
+                <div class="dashboard-card-header">
+                  <h3 class="dashboard-card-title">Add Category</h3>
+                </div>
+                <form id="create-cat-form">
+                  <div class="form-group">
+                    <label for="cat-name">Category Name</label>
+                    <input type="text" id="cat-name" class="input-control" placeholder="e.g. Vehicles" required>
+                  </div>
+                  <button type="submit" class="btn btn-block">Add Category</button>
+                </form>
+              </div>
+
+              <div class="dashboard-card">
+                <div class="dashboard-card-header">
+                  <h3 class="dashboard-card-title">Asset Categories List</h3>
+                </div>
+                <div class="table-container" style="border: none; margin: 0;">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Category Name</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-cats-tbody">
+                      <!-- Populated dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab C: Employee Directory -->
+          <div id="tab-employees" class="admin-tab-content d-none">
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <h3 class="dashboard-card-title">Employee Promotion Board</h3>
+              </div>
+              <div class="table-container" style="border: none; margin: 0;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Department</th>
+                      <th>Current Role</th>
+                      <th>Status</th>
+                      <th>Promote / Update Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-employees-tbody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================== 9. NOTIFICATIONS FEED VIEW ==================== -->
+        <section id="view-notifications" class="view-section d-none">
+          <div class="flex justify-between align-center mb-4">
+            <h3>Notifications Feed</h3>
+            <div class="flex gap-2">
+              <select id="notif-filter" class="input-control">
+                <option value="All">All Notifications</option>
+                <option value="Alerts">Alerts (Overdue/Audits)</option>
+                <option value="Approvals">Approvals (Transfers/Maint)</option>
+                <option value="Bookings">Bookings</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="notifications-list-container">
+            <div class="text-center" style="padding: 20px; color: var(--text-muted);">
+              No notifications.
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================== 10. SYSTEM ACTIVITY LOGS VIEW ==================== -->
+        <section id="view-logs" class="view-section d-none">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title"><i data-lucide="file-text"></i> System Activity Logs</h3>
+            </div>
+            <div class="table-container" style="border: none; margin: 0;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Log ID</th>
+                    <th>Actor</th>
+                    <th>Action</th>
+                    <th>Details</th>
+                    <th>Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody id="logs-tbody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- Modal A: Register Asset Modal -->
+  <div class="modal-overlay" id="modal-register-asset">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Register New Asset</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="register-asset-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="reg-name">Asset Name</label>
+            <input type="text" id="reg-name" class="input-control" placeholder="e.g. MacBook Pro 16" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="reg-category">Category</label>
+              <select id="reg-category" class="input-control" required></select>
+            </div>
+            <div class="form-group">
+              <label for="reg-serial">Serial Number</label>
+              <input type="text" id="reg-serial" class="input-control" placeholder="e.g. C02X87HG..." required>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="reg-location">Initial Location</label>
+              <input type="text" id="reg-location" class="input-control" placeholder="e.g. HQ Floor 3" required>
+            </div>
+            <div class="form-group">
+              <label for="reg-cost">Acquisition Cost ($)</label>
+              <input type="number" step="0.01" id="reg-cost" class="input-control" value="0.00" required>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="reg-date">Acquisition Date</label>
+              <input type="date" id="reg-date" class="input-control" required>
+            </div>
+            <div class="form-group">
+              <label for="reg-condition">Condition</label>
+              <select id="reg-condition" class="input-control" required>
+                <option value="New">New</option>
+                <option value="Good" selected>Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Damaged">Damaged</option>
+                <option value="Broken">Broken</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="flex-direction: row; gap: 8px; align-items: center; margin-top: 8px;">
+            <input type="checkbox" id="reg-shared" style="width: 18px; height: 18px; cursor: pointer;">
+            <label for="reg-shared" style="margin-bottom: 0; cursor: pointer;">Mark as a shared/bookable resource (e.g. Meeting Room, Pool Vehicle)</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn">Register Asset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal B: Asset Details & History Modal -->
+  <div class="modal-overlay" id="modal-asset-details">
+    <div class="modal-container" style="max-width: 800px;">
+      <div class="modal-header">
+        <h3 id="details-asset-tag">Asset Details</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="details-grid">
+          <!-- Text details -->
+          <div>
+            <h4 id="details-asset-name" style="font-size: 20px; font-weight: 700; margin-bottom: 12px;">Asset Name</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 14px;">
+              <div><strong style="color: var(--text-muted)">Category:</strong> <span id="details-category">Category</span></div>
+              <div><strong style="color: var(--text-muted)">Serial Number:</strong> <span id="details-serial">Serial</span></div>
+              <div><strong style="color: var(--text-muted)">Current Status:</strong> <span id="details-status">Status</span></div>
+              <div><strong style="color: var(--text-muted)">Condition:</strong> <span id="details-condition">Condition</span></div>
+              <div><strong style="color: var(--text-muted)">Location:</strong> <span id="details-location">Location</span></div>
+              <div><strong style="color: var(--text-muted)">Acquisition Cost:</strong> <span id="details-cost">Cost</span></div>
+              <div><strong style="color: var(--text-muted)">Acquisition Date:</strong> <span id="details-date">Date</span></div>
+              <div><strong style="color: var(--text-muted)">Current Holder:</strong> <span id="details-holder">None</span></div>
+            </div>
+            
+            <!-- Quick allocation return buttons inside details for managers -->
+            <div id="details-quick-actions" style="margin-top: 24px; display: flex; gap: 10px;">
+              <button id="btn-details-allocate" class="btn">Allocate</button>
+              <button id="btn-details-return" class="btn btn-secondary">Mark Returned</button>
+            </div>
+          </div>
+          
+          <!-- QR card -->
+          <div class="qr-card">
+            <img id="details-qr-img" src="" alt="Asset QR Code" class="qr-code-img">
+            <span id="details-qr-text" class="qr-text">ASSETFLOW:AF-XXXX:...</span>
+          </div>
+        </div>
+
+        <!-- History Tabs -->
+        <div class="tabs-header" style="margin-top: 30px; margin-bottom: 16px;">
+          <button class="tab-btn active" id="btn-tab-allocation-history">Allocation History</button>
+          <button class="tab-btn" id="btn-tab-maintenance-history">Maintenance Tickets</button>
+        </div>
+
+        <!-- Allocation History Panel -->
+        <div id="panel-allocation-history" class="table-container" style="border: none; margin: 0;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Holder</th>
+                <th>Department</th>
+                <th>Allocated On</th>
+                <th>Returned On</th>
+                <th>Condition</th>
+                <th>Check-in Notes</th>
+              </tr>
+            </thead>
+            <tbody id="details-alloc-history-tbody">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Maintenance History Panel -->
+        <div id="panel-maintenance-history" class="table-container d-none" style="border: none; margin: 0;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Issue Description</th>
+                <th>Priority</th>
+                <th>Reporter</th>
+                <th>Status</th>
+                <th>Assigned Technician</th>
+                <th>Resolution Notes</th>
+              </tr>
+            </thead>
+            <tbody id="details-maint-history-tbody">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-cancel">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal C: Check-in / Return Asset Modal -->
+  <div class="modal-overlay" id="modal-return-asset">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Return Asset Check-in</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="return-asset-form">
+        <input type="hidden" id="return-asset-id-hidden">
+        <div class="modal-body">
+          <p id="return-asset-prompt" style="font-size: 14px; margin-bottom: 20px; color: var(--text-muted);">
+            Please fill in the return parameters for asset tag <strong>AF-XXXX</strong>.
+          </p>
+          <div class="form-group">
+            <label for="ret-condition">Check-in Condition</label>
+            <select id="ret-condition" class="input-control" required>
+              <option value="New">New</option>
+              <option value="Good" selected>Good</option>
+              <option value="Fair">Fair</option>
+              <option value="Damaged">Damaged</option>
+              <option value="Broken">Broken</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ret-notes">Check-in Notes / Observations</label>
+            <textarea id="ret-notes" class="input-control" rows="3" placeholder="e.g. Scratches on lid, returned with charger."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-success">Complete Check-in</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal D: Raise Maintenance Ticket Modal -->
+  <div class="modal-overlay" id="modal-raise-maintenance">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Raise Maintenance Request</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="raise-maintenance-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="maint-asset-id">Select Damaged/Broken Asset</label>
+            <select id="maint-asset-id" class="input-control" required>
+              <option value="">-- Choose Asset --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="maint-priority">Urgency / Priority</label>
+            <select id="maint-priority" class="input-control" required>
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="maint-desc">Describe the Problem / Issue</label>
+            <textarea id="maint-desc" class="input-control" rows="4" placeholder="Be detailed (e.g. Laptop will not charge, screen flickering, vehicle tire puncture...)" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-block">Submit Maintenance Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal E: Promote Employee / Update Role Modal (Admin) -->
+  <div class="modal-overlay" id="modal-promote-employee">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Update Employee Profile</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="promote-employee-form">
+        <input type="hidden" id="promote-emp-id-hidden">
+        <div class="modal-body">
+          <h4 id="promote-emp-name" style="margin-bottom: 16px;">Employee Name</h4>
+          <div class="form-group">
+            <label for="promote-role">Access Role</label>
+            <select id="promote-role" class="input-control" required>
+              <option value="employee">Employee</option>
+              <option value="department_head">Department Head</option>
+              <option value="asset_manager">Asset Manager</option>
+              <option value="admin">Administrator</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="promote-dept">Assign Department</label>
+            <select id="promote-dept" class="input-control">
+              <option value="">-- Unassigned / None --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="promote-status">Status</label>
+            <select id="promote-status" class="input-control" required>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal F: Manage Maintenance Request Modal (Asset Manager) -->
+  <div class="modal-overlay" id="modal-manage-maintenance">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Manage Maintenance Ticket</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="manage-maintenance-form">
+        <input type="hidden" id="manage-maint-id-hidden">
+        <div class="modal-body">
+          <div style="margin-bottom: 16px; font-size: 14px;">
+            <p><strong>Asset:</strong> <span id="manage-maint-asset">Asset Tag</span></p>
+            <p><strong>Reported By:</strong> <span id="manage-maint-reporter">Reporter</span></p>
+            <p style="margin-top: 8px;"><strong>Issue Description:</strong></p>
+            <p style="color: var(--text-muted); background: var(--bg-primary); padding: 12px; border-radius: 8px; font-style: italic; margin-top: 4px;" id="manage-maint-desc">Description</p>
+          </div>
+          <div class="form-group">
+            <label for="manage-maint-status">Ticket Status</label>
+            <select id="manage-maint-status" class="input-control" required>
+              <option value="Pending">Pending Approval</option>
+              <option value="Approved">Approved / Scheduled</option>
+              <option value="Rejected">Rejected</option>
+              <option value="Technician Assigned">Technician Assigned</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="manage-maint-tech">Assigned Technician Name</label>
+            <input type="text" id="manage-maint-tech" class="input-control" placeholder="e.g. Ramesh Kumar">
+          </div>
+          <div class="form-group">
+            <label for="manage-maint-notes">Resolution Notes</label>
+            <textarea id="manage-maint-notes" class="input-control" rows="3" placeholder="Explain how the issue was fixed (required if marking Resolved)"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn">Update Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Javascript entrypoint -->
+  <script src="app.js" type="module"></script>
+</body>
+</html>
